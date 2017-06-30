@@ -21,6 +21,17 @@
 		C54DD0E81F05FBE900E8CDFA /* MKBlue_VC.m in Sources */ = {isa = PBXBuildFile; fileRef = C54DD0E71F05FBE900E8CDFA /* MKBlue_VC.m */; };
 		C54DD0EB1F05FC1000E8CDFA /* MKRed_VC.m in Sources */ = {isa = PBXBuildFile; fileRef = C54DD0EA1F05FC0F00E8CDFA /* MKRed_VC.m */; };
 		C54DD0EE1F05FF1400E8CDFA /* MKBase_VC.m in Sources */ = {isa = PBXBuildFile; fileRef = C54DD0ED1F05FF1400E8CDFA /* MKBase_VC.m */; };
+		C54DD0F41F06425600E8CDFA /* MKRouterHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C54DD0F31F06425600E8CDFA /* MKRouterHelper.m */; };
+		C54DD10C1F064D3C00E8CDFA /* MJExtensionConst.m in Sources */ = {isa = PBXBuildFile; fileRef = C54DD0F91F064D3C00E8CDFA /* MJExtensionConst.m */; };
+		C54DD10D1F064D3C00E8CDFA /* MJFoundation.m in Sources */ = {isa = PBXBuildFile; fileRef = C54DD0FB1F064D3C00E8CDFA /* MJFoundation.m */; };
+		C54DD10E1F064D3C00E8CDFA /* MJProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = C54DD0FD1F064D3C00E8CDFA /* MJProperty.m */; };
+		C54DD10F1F064D3C00E8CDFA /* MJPropertyKey.m in Sources */ = {isa = PBXBuildFile; fileRef = C54DD0FF1F064D3C00E8CDFA /* MJPropertyKey.m */; };
+		C54DD1101F064D3C00E8CDFA /* MJPropertyType.m in Sources */ = {isa = PBXBuildFile; fileRef = C54DD1011F064D3C00E8CDFA /* MJPropertyType.m */; };
+		C54DD1111F064D3C00E8CDFA /* NSObject+MJClass.m in Sources */ = {isa = PBXBuildFile; fileRef = C54DD1031F064D3C00E8CDFA /* NSObject+MJClass.m */; };
+		C54DD1121F064D3C00E8CDFA /* NSObject+MJCoding.m in Sources */ = {isa = PBXBuildFile; fileRef = C54DD1051F064D3C00E8CDFA /* NSObject+MJCoding.m */; };
+		C54DD1131F064D3C00E8CDFA /* NSObject+MJKeyValue.m in Sources */ = {isa = PBXBuildFile; fileRef = C54DD1071F064D3C00E8CDFA /* NSObject+MJKeyValue.m */; };
+		C54DD1141F064D3C00E8CDFA /* NSObject+MJProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = C54DD1091F064D3C00E8CDFA /* NSObject+MJProperty.m */; };
+		C54DD1151F064D3C00E8CDFA /* NSString+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = C54DD10B1F064D3C00E8CDFA /* NSString+MJExtension.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +81,29 @@
 		C54DD0EC1F05FF1400E8CDFA /* MKBase_VC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKBase_VC.h; sourceTree = "<group>"; };
 		C54DD0ED1F05FF1400E8CDFA /* MKBase_VC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKBase_VC.m; sourceTree = "<group>"; };
 		C54DD0EF1F05FF6700E8CDFA /* MKConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKConst.h; sourceTree = "<group>"; };
+		C54DD0F21F06425600E8CDFA /* MKRouterHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRouterHelper.h; sourceTree = "<group>"; };
+		C54DD0F31F06425600E8CDFA /* MKRouterHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRouterHelper.m; sourceTree = "<group>"; };
+		C54DD0F71F064D3C00E8CDFA /* MJExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJExtension.h; sourceTree = "<group>"; };
+		C54DD0F81F064D3C00E8CDFA /* MJExtensionConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJExtensionConst.h; sourceTree = "<group>"; };
+		C54DD0F91F064D3C00E8CDFA /* MJExtensionConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJExtensionConst.m; sourceTree = "<group>"; };
+		C54DD0FA1F064D3C00E8CDFA /* MJFoundation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJFoundation.h; sourceTree = "<group>"; };
+		C54DD0FB1F064D3C00E8CDFA /* MJFoundation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJFoundation.m; sourceTree = "<group>"; };
+		C54DD0FC1F064D3C00E8CDFA /* MJProperty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJProperty.h; sourceTree = "<group>"; };
+		C54DD0FD1F064D3C00E8CDFA /* MJProperty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJProperty.m; sourceTree = "<group>"; };
+		C54DD0FE1F064D3C00E8CDFA /* MJPropertyKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJPropertyKey.h; sourceTree = "<group>"; };
+		C54DD0FF1F064D3C00E8CDFA /* MJPropertyKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJPropertyKey.m; sourceTree = "<group>"; };
+		C54DD1001F064D3C00E8CDFA /* MJPropertyType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJPropertyType.h; sourceTree = "<group>"; };
+		C54DD1011F064D3C00E8CDFA /* MJPropertyType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJPropertyType.m; sourceTree = "<group>"; };
+		C54DD1021F064D3C00E8CDFA /* NSObject+MJClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+MJClass.h"; sourceTree = "<group>"; };
+		C54DD1031F064D3C00E8CDFA /* NSObject+MJClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+MJClass.m"; sourceTree = "<group>"; };
+		C54DD1041F064D3C00E8CDFA /* NSObject+MJCoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+MJCoding.h"; sourceTree = "<group>"; };
+		C54DD1051F064D3C00E8CDFA /* NSObject+MJCoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+MJCoding.m"; sourceTree = "<group>"; };
+		C54DD1061F064D3C00E8CDFA /* NSObject+MJKeyValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+MJKeyValue.h"; sourceTree = "<group>"; };
+		C54DD1071F064D3C00E8CDFA /* NSObject+MJKeyValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+MJKeyValue.m"; sourceTree = "<group>"; };
+		C54DD1081F064D3C00E8CDFA /* NSObject+MJProperty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+MJProperty.h"; sourceTree = "<group>"; };
+		C54DD1091F064D3C00E8CDFA /* NSObject+MJProperty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+MJProperty.m"; sourceTree = "<group>"; };
+		C54DD10A1F064D3C00E8CDFA /* NSString+MJExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MJExtension.h"; sourceTree = "<group>"; };
+		C54DD10B1F064D3C00E8CDFA /* NSString+MJExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MJExtension.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +154,7 @@
 		C54DD09D1F039CD800E8CDFA /* MKRouterDemo */ = {
 			isa = PBXGroup;
 			children = (
+				C54DD0F61F064D3C00E8CDFA /* MJExtension */,
 				C54DD0E51F05F8DF00E8CDFA /* testVC */,
 				C54DD0D21F039EA600E8CDFA /* MKRouter */,
 				C54DD0D11F039E6E00E8CDFA /* Origin */,
@@ -179,6 +214,8 @@
 				C54DD0D71F03B2C200E8CDFA /* NSString+MKAdd.m */,
 				C54DD0D31F039EDD00E8CDFA /* MKRouter.h */,
 				C54DD0D41F039EDD00E8CDFA /* MKRouter.m */,
+				C54DD0F21F06425600E8CDFA /* MKRouterHelper.h */,
+				C54DD0F31F06425600E8CDFA /* MKRouterHelper.m */,
 			);
 			path = MKRouter;
 			sourceTree = "<group>";
@@ -194,6 +231,34 @@
 				C54DD0ED1F05FF1400E8CDFA /* MKBase_VC.m */,
 			);
 			path = testVC;
+			sourceTree = "<group>";
+		};
+		C54DD0F61F064D3C00E8CDFA /* MJExtension */ = {
+			isa = PBXGroup;
+			children = (
+				C54DD0F71F064D3C00E8CDFA /* MJExtension.h */,
+				C54DD0F81F064D3C00E8CDFA /* MJExtensionConst.h */,
+				C54DD0F91F064D3C00E8CDFA /* MJExtensionConst.m */,
+				C54DD0FA1F064D3C00E8CDFA /* MJFoundation.h */,
+				C54DD0FB1F064D3C00E8CDFA /* MJFoundation.m */,
+				C54DD0FC1F064D3C00E8CDFA /* MJProperty.h */,
+				C54DD0FD1F064D3C00E8CDFA /* MJProperty.m */,
+				C54DD0FE1F064D3C00E8CDFA /* MJPropertyKey.h */,
+				C54DD0FF1F064D3C00E8CDFA /* MJPropertyKey.m */,
+				C54DD1001F064D3C00E8CDFA /* MJPropertyType.h */,
+				C54DD1011F064D3C00E8CDFA /* MJPropertyType.m */,
+				C54DD1021F064D3C00E8CDFA /* NSObject+MJClass.h */,
+				C54DD1031F064D3C00E8CDFA /* NSObject+MJClass.m */,
+				C54DD1041F064D3C00E8CDFA /* NSObject+MJCoding.h */,
+				C54DD1051F064D3C00E8CDFA /* NSObject+MJCoding.m */,
+				C54DD1061F064D3C00E8CDFA /* NSObject+MJKeyValue.h */,
+				C54DD1071F064D3C00E8CDFA /* NSObject+MJKeyValue.m */,
+				C54DD1081F064D3C00E8CDFA /* NSObject+MJProperty.h */,
+				C54DD1091F064D3C00E8CDFA /* NSObject+MJProperty.m */,
+				C54DD10A1F064D3C00E8CDFA /* NSString+MJExtension.h */,
+				C54DD10B1F064D3C00E8CDFA /* NSString+MJExtension.m */,
+			);
+			path = MJExtension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -330,13 +395,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C54DD1121F064D3C00E8CDFA /* NSObject+MJCoding.m in Sources */,
+				C54DD1101F064D3C00E8CDFA /* MJPropertyType.m in Sources */,
+				C54DD10C1F064D3C00E8CDFA /* MJExtensionConst.m in Sources */,
+				C54DD10F1F064D3C00E8CDFA /* MJPropertyKey.m in Sources */,
+				C54DD1131F064D3C00E8CDFA /* NSObject+MJKeyValue.m in Sources */,
 				C54DD0EB1F05FC1000E8CDFA /* MKRed_VC.m in Sources */,
 				C54DD0A61F039CD800E8CDFA /* ViewController.m in Sources */,
+				C54DD10D1F064D3C00E8CDFA /* MJFoundation.m in Sources */,
+				C54DD1151F064D3C00E8CDFA /* NSString+MJExtension.m in Sources */,
+				C54DD10E1F064D3C00E8CDFA /* MJProperty.m in Sources */,
+				C54DD0F41F06425600E8CDFA /* MKRouterHelper.m in Sources */,
 				C54DD0DB1F03B33500E8CDFA /* MKUITools.m in Sources */,
 				C54DD0EE1F05FF1400E8CDFA /* MKBase_VC.m in Sources */,
 				C54DD0A31F039CD800E8CDFA /* AppDelegate.m in Sources */,
+				C54DD1141F064D3C00E8CDFA /* NSObject+MJProperty.m in Sources */,
 				C54DD0D51F039EDD00E8CDFA /* MKRouter.m in Sources */,
 				C54DD0A01F039CD800E8CDFA /* main.m in Sources */,
+				C54DD1111F064D3C00E8CDFA /* NSObject+MJClass.m in Sources */,
 				C54DD0D81F03B2C200E8CDFA /* NSString+MKAdd.m in Sources */,
 				C54DD0E81F05FBE900E8CDFA /* MKBlue_VC.m in Sources */,
 			);
