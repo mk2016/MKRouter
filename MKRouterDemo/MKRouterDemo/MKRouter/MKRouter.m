@@ -1,4 +1,26 @@
+//  The MIT License (MIT)
 //
+//  Copyright (c) 2014 LIGHT lightory@gmail.com
+//
+//  Permission is hereby granted, free of charge, to any person obtaining a copy
+//  of this software and associated documentation files (the “Software”), to deal
+//  in the Software without restriction, including without limitation the rights
+//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+//  copies of the Software, and to permit persons to whom the Software is
+//  furnished to do so, subject to the following conditions:
+//
+//  The above copyright notice and this permission notice shall be included in
+//  all copies or substantial portions of the Software.
+//
+//  THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+//  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+//  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+//  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+//  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+//  THE SOFTWARE.
+//
+//================================================================================
 //  MKRouter.m
 //  MKRouterDemo
 //
@@ -78,7 +100,26 @@ static MKRouter *sharedInstance = nil;
 }
 
 - (id)matchRedirection:(NSString *)route{
-    return [self matchRedirection:route orgin:YES];
+    NSString *finallyRoute = nil;
+    MKRouteType type = [self redirectionFinallyType:route finallyRoute:&finallyRoute];
+    if (type == MKRouteType_block) {
+        return [self matchBlock:route orginRoute:route];
+    }else if (type == MKRouteType_viewController){
+        return [self matchController:finallyRoute orginRoute:route];
+    }
+    return nil;
+}
+
+- (MKRouteType)redirectionFinallyType:(NSString *)route finallyRoute:(NSString **)finallyRoute{
+    MKRouteType type = [self canRoute:route];
+    if (type == MKRouteType_none || type == MKRouteType_block || type == MKRouteType_viewController) {
+        return type;
+    }else if (type == MKRouteType_redirection){
+        NSString *nextRoute = [self matchNextRouteWith:route];
+        *finallyRoute = nextRoute;
+        return [self redirectionFinallyType:nextRoute finallyRoute:finallyRoute];
+    }
+    return MKRouteType_none;
 }
 
 #pragma mark - ***** other *****
@@ -161,32 +202,37 @@ static MKRouter *sharedInstance = nil;
 }
 
 
-static NSString * _orginRoute = nil;
-- (id)matchRedirection:(NSString *)route orgin:(BOOL)orgin{
-    if (orgin) {
-        _orginRoute = route;
-    }
-    MKRouteType type = [self canRoute:route];
-    if (type == MKRouteType_block) {
-        return [self matchBlock:route orginRoute:_orginRoute];
-    }else if (type == MKRouteType_viewController){
-        return [self matchController:route orginRoute:_orginRoute];
-    }else if (type == MKRouteType_redirection){
-        NSString *nextRoute = [self matchNextRouteWith:route];
-        return [self matchRedirection:nextRoute orgin:NO];
-    }
-    return nil;
-}
 
 - (NSString *)matchNextRouteWith:(NSString *)route{
     NSDictionary *params = [self paramsInRoute:route];
     if (!params) {
         return nil;
     }
-    NSString *finallyRoute = params[kMKRouterKeyRedirection];
-    if (finallyRoute) {
-        return finallyRoute;
+    NSString *redirectionRoute = params[kMKRouterKeyRedirection];
+    if (redirectionRoute) {
+        NSMutableString *finallyRoute = [NSMutableString stringWithString:redirectionRoute];
+        NSArray *paths = [finallyRoute componentsSeparatedByString:@"/"];
+        for (NSString *str in paths) {
+            if ([str hasPrefix:@":"]) {
+                if ([params valueForKey:[str substringFromIndex:1]]) {
+                    NSRange range = [finallyRoute rangeOfString:str];
+                    if (range.location != NSNotFound) {
+                        [finallyRoute replaceCharactersInRange:range withString:[params valueForKey:[str substringFromIndex:1]]];
+                    }
+                }
+            }
+        }
+        if (route) {
+            NSRange range = [route rangeOfString:@"?"];
+            if (range.location != NSNotFound) {
+                NSMutableString *orginRoute = [NSMutableString stringWithString:route];
+                [orginRoute replaceCharactersInRange:NSMakeRange(0, range.location) withString:finallyRoute];
+                return orginRoute;
+            }
+        }
+        return finallyRoute ;
     }
+    
     return nil;
 }
 
@@ -343,11 +389,11 @@ static char kAssociatedBlockKey;
     return objc_getAssociatedObject(self, &kAssociatedParamsObjectKey);
 }
 
-- (void)setMk_block:(MKRouterBlock)mk_block{
+- (void)setMk_block:(MKBlock)mk_block{
     objc_setAssociatedObject(self, &kAssociatedBlockKey, mk_block, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
-- (MKRouterBlock)mk_block{
+- (MKBlock)mk_block{
     return objc_getAssociatedObject(self, &kAssociatedBlockKey);
 }
 @end
