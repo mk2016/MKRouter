@@ -35,7 +35,7 @@ typedef NS_ENUM (NSInteger, MKRouteType) {
     MKRouteType_none            = 0,
     MKRouteType_viewController,
     MKRouteType_block,
-    MKRouteType_redirection
+    MKRouteType_redirection             //重定向
 };
 
 typedef id (^MKRouterBlock)(id params);
@@ -60,8 +60,19 @@ typedef void (^MKBlock)(id result);
 
 
 
-#pragma mark - ***** UIViewController Category *****
+#pragma mark - ***** Category *****
+/** UIViewController */
 @interface UIViewController (MKRouter)
 @property (nonatomic, strong) NSDictionary *mk_routeParams;
 @property (nonatomic, copy) MKBlock mk_block;
+@end
+
+/** URL Encode Decode */
+@interface NSString(MKAdd)
+/** 对字符串进行URLEncode */
+- (NSString *)mk_stringByURLEncode;
+/** 对字符串进行URLDecode */
+- (NSString *)mk_stringByURLDecode;
+- (id)mk_jsonString2Dictionary;
+
 @end

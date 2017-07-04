@@ -29,8 +29,6 @@
 //
 
 #import "MKRouter.h"
-#import "NSString+MKAdd.h"
-#import "MKUITools.h"
 #import <objc/runtime.h>
 
 @interface MKRouter()
@@ -177,7 +175,7 @@ static MKRouter *sharedInstance = nil;
     
     NSArray *pathAry = [params[kMKRouterKeyPath] componentsSeparatedByString:@"/"];
     if (pathAry && pathAry.count >= 3 && [pathAry.firstObject isEqualToString:@"sb"]) {
-        viewController = [MKUITools getVCFromStoryboard:pathAry[1] identify:pathAry[2]];
+        viewController = [[UIStoryboard storyboardWithName:pathAry[1] bundle:nil] instantiateViewControllerWithIdentifier:pathAry[2]];
     }else{
         viewController = [[controllerClass alloc] init];
     }
@@ -391,5 +389,46 @@ static char kAssociatedBlockKey;
 
 - (MKBlock)mk_block{
     return objc_getAssociatedObject(self, &kAssociatedBlockKey);
+}
+@end
+
+
+@implementation NSString(MKAdd)
+
+/** 对字符串进行URLEncode */
+- (NSString *)mk_stringByURLEncode{
+    NSString *encodedString = (NSString *)
+    CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
+                                                              (CFStringRef)self,
+                                                              NULL,
+                                                              (CFStringRef)@"!$&'()*+,-./:;=?@_~%#[]",
+                                                              kCFStringEncodingUTF8));
+    return encodedString;
+}
+
+/** 对字符串进行URLDecode */
+- (NSString *)mk_stringByURLDecode{
+    if ([self respondsToSelector:@selector(stringByRemovingPercentEncoding)]) {
+        return [self stringByRemovingPercentEncoding];
+    } else {
+        NSString *decoded = (__bridge_transfer NSString *)
+        CFURLCreateStringByReplacingPercentEscapesUsingEncoding(NULL,
+                                                                (__bridge CFStringRef)self,
+                                                                CFSTR(""),
+                                                                CFStringConvertNSStringEncodingToEncoding(NSUTF8StringEncoding));
+        return decoded;
+    }
+}
+
+
+- (id)mk_jsonString2Dictionary{
+    NSData *jsonData = [self dataUsingEncoding:NSUTF8StringEncoding];
+    NSError *error;
+    NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:&error];
+    if (error) {
+        NSLog(@"json解析失败:%@",error);
+        return nil;
+    }
+    return dic;
 }
 @end
