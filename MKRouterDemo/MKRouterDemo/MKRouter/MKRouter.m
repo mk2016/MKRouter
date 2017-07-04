@@ -38,8 +38,12 @@
 @end
 
 static NSString * kMKRouterKeyVCClass       = @"controllerClass";
-static NSString * kMKRouterKeyRedirection   = @"redirectionRouter";
+static NSString * kMKRouterKeyPath          = @"routePath";
+static NSString * kMKRouterKeyRoute         = @"route";
+static NSString * kMKRouterKeyOrginRoute    = @"orginRoute";
+static NSString * kMKRouterKeyParam         = @"param";
 
+static NSString * kMKRouterKeyRedirection   = @"redirectionRoute";
 static NSString * kMKRouterKeyBlock         = @"block";
 static NSString * kMKRouterKeyEnd           = @"_";
 
@@ -139,26 +143,39 @@ static MKRouter *sharedInstance = nil;
 
 
 
+#pragma mark - ========= private method =========
+#pragma mark - ***** register *****
+/** 以 NSDictionary 层级 保持 router */
+- (NSMutableDictionary *)subRoutesToRoute:(NSString *)route{
+    NSArray *pathComponents = [self pathComponentsFromRoute:route];
+    NSInteger index = 0;
+    NSMutableDictionary *subRoutes = self.routes;
+    
+    while (index < pathComponents.count) {
+        NSString *pathComponent = pathComponents[index];
+        if (![subRoutes objectForKey:pathComponent]) {
+            subRoutes[pathComponent] = @{}.mutableCopy;
+        }
+        subRoutes = subRoutes[pathComponent];
+        index++;
+    }
+    return subRoutes;
+}
 
-
-
-
-
-
-
-#pragma mark - ***** private method match*****
+#pragma mark - ***** match *****
+/** view controller */
 - (UIViewController *)matchController:(NSString *)route orginRoute:(NSString *)orginRoute{
     NSMutableDictionary *params = [self paramsInRoute:route].mutableCopy;
     
     if (orginRoute && orginRoute.length > 0) {
-        [params setValue:orginRoute forKey:@"orginRoute"];
+        [params setValue:orginRoute forKey:kMKRouterKeyOrginRoute];
     }
     
     Class controllerClass = params[kMKRouterKeyVCClass];
     
     UIViewController *viewController = nil;
     
-    NSArray *pathAry = params[@"routePath"];
+    NSArray *pathAry = [params[kMKRouterKeyPath] componentsSeparatedByString:@"/"];
     if (pathAry && pathAry.count >= 3 && [pathAry.firstObject isEqualToString:@"sb"]) {
         viewController = [MKUITools getVCFromStoryboard:pathAry[1] identify:pathAry[2]];
     }else{
@@ -166,13 +183,13 @@ static MKRouter *sharedInstance = nil;
     }
     
     if ([viewController respondsToSelector:@selector(setMk_routeParams:)]) {
-        NSString *codeStr = params[@"param"];
+        NSString *codeStr = params[kMKRouterKeyParam];
         NSRange range = [codeStr rangeOfString:@"%"];
         if (codeStr && range.location != NSNotFound) {
             NSString *json = [codeStr mk_stringByURLDecode];
             
             NSMutableDictionary *tempDic = [params mutableCopy];
-            [tempDic setValue:json forKey:@"param"];
+            [tempDic setValue:json forKey:kMKRouterKeyParam];
             params = [tempDic mutableCopy];
         }
         [viewController performSelector:@selector(setMk_routeParams:) withObject:[params copy]];
@@ -180,13 +197,14 @@ static MKRouter *sharedInstance = nil;
     return viewController;
 }
 
+/** block */
 - (MKRouterBlock)matchBlock:(NSString *)route orginRoute:(NSString *)orginRoute{
     NSMutableDictionary *params = [self paramsInRoute:route].mutableCopy;
     if (!params){
         return nil;
     }
     if (orginRoute && orginRoute.length > 0) {
-        [params setValue:orginRoute forKey:@"orginRoute"];
+        [params setValue:orginRoute forKey:kMKRouterKeyOrginRoute];
     }
     
     MKRouterBlock routerBlock = [params[kMKRouterKeyBlock] copy];
@@ -202,7 +220,7 @@ static MKRouter *sharedInstance = nil;
 }
 
 
-
+/** redirection */
 - (NSString *)matchNextRouteWith:(NSString *)route{
     NSDictionary *params = [self paramsInRoute:route];
     if (!params) {
@@ -237,73 +255,17 @@ static MKRouter *sharedInstance = nil;
 }
 
 
-
-
-#pragma mark - ***** private method *****
-/** 以 NSDictionary 层级 保持 router */
-- (NSMutableDictionary *)subRoutesToRoute:(NSString *)route{
-    NSArray *pathComponents = [self pathComponentsFromRoute:route];
-    NSInteger index = 0;
-    NSMutableDictionary *subRoutes = self.routes;
-    
-    while (index < pathComponents.count) {
-        NSString *pathComponent = pathComponents[index];
-        if (![subRoutes objectForKey:pathComponent]) {
-            subRoutes[pathComponent] = @{}.mutableCopy;
-        }
-        subRoutes = subRoutes[pathComponent];
-        index++;
-    }
-    return subRoutes;
-}
-
-
-
-/** filter out the app URL compontents */
-+ (NSString *)filterAppUrlScheme:(NSString *)route{
-    for (NSString *appUrlScheme in [self appUrlSchemes]) {
-        if ([route hasPrefix:[NSString stringWithFormat:@"%@:", appUrlScheme]]) {
-            return [route substringFromIndex:appUrlScheme.length + 2];
-        }
-    }
-    return route;
-}
-
-/** app URL schemes */
-+ (NSArray *)appUrlSchemes{
-    NSMutableArray *appUrlSchemes = [NSMutableArray array];
-    NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
-    for (NSDictionary *dic in infoDictionary[@"CFBundleURLTypes"]) {
-        NSString *appUrlScheme = dic[@"CFBundleURLSchemes"][0];
-        [appUrlSchemes addObject:appUrlScheme];
-    }
-    return [appUrlSchemes copy];
-}
-
-/** 以/分割 返回路径数组 */
-- (NSArray *)pathComponentsFromRoute:(NSString *)route{
-    NSMutableArray *pathComponents = [NSMutableArray array];
-    NSURL *url = [NSURL URLWithString:[route stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-    
-    for (NSString *pathComponent in url.path.pathComponents) {
-        if ([pathComponent isEqualToString:@"/"]) continue;
-        if ([[pathComponent substringToIndex:1] isEqualToString:@"?"]) break;
-        [pathComponents addObject:[pathComponent stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-    }
-    return [pathComponents copy];
-}
-
 #pragma mark - ***** 返回 route 字典 *****
 - (NSDictionary *)paramsInRoute:(NSString *)route{
     if (!route) {
         return nil;
     }
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    params[@"route"] = [MKRouter filterAppUrlScheme:route];
+    params[kMKRouterKeyRoute] = [MKRouter filterAppUrlScheme:route];
     
     NSMutableDictionary *subRoutes = self.routes;
-    NSArray *pathComponents = [self pathComponentsFromRoute:params[@"route"]];
-    params[@"routePath"] = pathComponents;
+    NSArray *pathComponents = [self pathComponentsFromRoute:params[kMKRouterKeyRoute]];
+    params[kMKRouterKeyPath] = [pathComponents componentsJoinedByString:@"/"];
     for (NSString *pathComponent in pathComponents) {
         BOOL found = NO;
         NSArray *subRoutesKeys = subRoutes.allKeys;
@@ -364,6 +326,40 @@ static MKRouter *sharedInstance = nil;
     return [NSDictionary dictionaryWithDictionary:params];
 }
 
+/** 以/分割 返回路径数组 */
+- (NSArray *)pathComponentsFromRoute:(NSString *)route{
+    NSMutableArray *pathComponents = [NSMutableArray array];
+    NSURL *url = [NSURL URLWithString:[route stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    
+    for (NSString *pathComponent in url.path.pathComponents) {
+        if ([pathComponent isEqualToString:@"/"]) continue;
+        if ([[pathComponent substringToIndex:1] isEqualToString:@"?"]) break;
+        [pathComponents addObject:[pathComponent stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    }
+    return [pathComponents copy];
+}
+
+
+#pragma mark - ***** filter out the app URL compontents *****
++ (NSString *)filterAppUrlScheme:(NSString *)route{
+    for (NSString *appUrlScheme in [self appUrlSchemes]) {
+        if ([route hasPrefix:[NSString stringWithFormat:@"%@:", appUrlScheme]]) {
+            return [route substringFromIndex:appUrlScheme.length + 2];
+        }
+    }
+    return route;
+}
+
+/** app URL schemes */
++ (NSArray *)appUrlSchemes{
+    NSMutableArray *appUrlSchemes = [NSMutableArray array];
+    NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
+    for (NSDictionary *dic in infoDictionary[@"CFBundleURLTypes"]) {
+        NSString *appUrlScheme = dic[@"CFBundleURLSchemes"][0];
+        [appUrlSchemes addObject:appUrlScheme];
+    }
+    return [appUrlSchemes copy];
+}
 
 #pragma mark - ***** lazy *****
 - (NSMutableDictionary *)routes{
