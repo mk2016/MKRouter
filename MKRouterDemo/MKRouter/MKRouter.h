@@ -21,11 +21,6 @@
 //  THE SOFTWARE.
 //
 //================================================================================
-// Development on the basis of HHRoute
-// gitbub:
-// HHRoute:   https://github.com/lightory/HHRouter
-// MKRoute:   https://github.com/mk2016/MKRouter
-//================================================================================
 //  MKRouter.h
 //  MKRouterDemo
 //
@@ -40,7 +35,7 @@ typedef NS_ENUM (NSInteger, MKRouteType) {
     MKRouteType_none            = 0,
     MKRouteType_viewController,
     MKRouteType_block,
-    MKRouteType_redirection         
+    MKRouteType_redirection             //重定向
 };
 
 typedef id (^MKRouterBlock)(id params);
@@ -72,20 +67,17 @@ typedef void (^MKBlock)(id result);
 @property (nonatomic, copy) MKBlock mk_block;
 @end
 
+/** URL Encode Decode */
 @interface NSString(MKRouter)
-/** string URLEncode */
+/** 对字符串进行URLEncode */
 - (NSString *)mk_stringByURLEncode;
-
-/** string URLDecode */
+/** 对字符串进行URLDecode */
 - (NSString *)mk_stringByURLDecode;
-
-/** json string -> dictionary */
 - (id)mk_jsonString2Dictionary;
 
 @end
 
 @interface NSDictionary (MKRouter)
-/** obj -> dictionary */
 + (NSDictionary *)mk_dictionaryWithJson:(id)json;
 @end
 

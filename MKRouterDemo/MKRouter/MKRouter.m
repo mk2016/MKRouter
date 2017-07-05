@@ -253,7 +253,7 @@ static MKRouter *sharedInstance = nil;
 }
 
 
-#pragma mark - ***** return dictionay with route info *****
+#pragma mark - ***** 返回 route 字典 *****
 - (NSDictionary *)paramsInRoute:(NSString *)route{
     if (!route) {
         return nil;
@@ -324,7 +324,7 @@ static MKRouter *sharedInstance = nil;
     return [NSDictionary dictionaryWithDictionary:params];
 }
 
-/** return route path array */
+/** 以/分割 返回路径数组 */
 - (NSArray *)pathComponentsFromRoute:(NSString *)route{
     NSMutableArray *pathComponents = [NSMutableArray array];
     NSURL *url = [NSURL URLWithString:[route stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
@@ -395,7 +395,7 @@ static char kAssociatedBlockKey;
 
 @implementation NSString(MKRouter)
 
-/** string URLEncode */
+/** 对字符串进行URLEncode */
 - (NSString *)mk_stringByURLEncode{
     NSString *encodedString = (NSString *)
     CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
@@ -406,7 +406,7 @@ static char kAssociatedBlockKey;
     return encodedString;
 }
 
-/** string URLDecode */
+/** 对字符串进行URLDecode */
 - (NSString *)mk_stringByURLDecode{
     if ([self respondsToSelector:@selector(stringByRemovingPercentEncoding)]) {
         return [self stringByRemovingPercentEncoding];
@@ -426,7 +426,7 @@ static char kAssociatedBlockKey;
     NSError *error;
     NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:&error];
     if (error) {
-        NSLog(@"json parsing failure:%@",error);
+        NSLog(@"json解析失败:%@",error);
         return nil;
     }
     return dic;
@@ -453,7 +453,7 @@ static char kAssociatedBlockKey;
         NSError *error;
         dic = [NSJSONSerialization JSONObjectWithData:jsonData options:kNilOptions error:&error];
         if (error) {
-            NSLog(@"json parsing failure:%@", error);
+            NSLog(@"json 解析失败:%@", error);
             dic = nil;
         }
     }

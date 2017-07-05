@@ -15,12 +15,9 @@
 		C54DD0AE1F039CD800E8CDFA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C54DD0AC1F039CD800E8CDFA /* LaunchScreen.storyboard */; };
 		C54DD0B91F039CD900E8CDFA /* MKRouterDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C54DD0B81F039CD900E8CDFA /* MKRouterDemoTests.m */; };
 		C54DD0C41F039CD900E8CDFA /* MKRouterDemoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = C54DD0C31F039CD900E8CDFA /* MKRouterDemoUITests.m */; };
-		C54DD0D51F039EDD00E8CDFA /* MKRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = C54DD0D41F039EDD00E8CDFA /* MKRouter.m */; };
-		C54DD0DB1F03B33500E8CDFA /* MKUITools.m in Sources */ = {isa = PBXBuildFile; fileRef = C54DD0DA1F03B33500E8CDFA /* MKUITools.m */; };
 		C54DD0E81F05FBE900E8CDFA /* MKBlue_VC.m in Sources */ = {isa = PBXBuildFile; fileRef = C54DD0E71F05FBE900E8CDFA /* MKBlue_VC.m */; };
 		C54DD0EB1F05FC1000E8CDFA /* MKRed_VC.m in Sources */ = {isa = PBXBuildFile; fileRef = C54DD0EA1F05FC0F00E8CDFA /* MKRed_VC.m */; };
 		C54DD0EE1F05FF1400E8CDFA /* MKBase_VC.m in Sources */ = {isa = PBXBuildFile; fileRef = C54DD0ED1F05FF1400E8CDFA /* MKBase_VC.m */; };
-		C54DD0F41F06425600E8CDFA /* MKRouterHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C54DD0F31F06425600E8CDFA /* MKRouterHelper.m */; };
 		C54DD10C1F064D3C00E8CDFA /* MJExtensionConst.m in Sources */ = {isa = PBXBuildFile; fileRef = C54DD0F91F064D3C00E8CDFA /* MJExtensionConst.m */; };
 		C54DD10D1F064D3C00E8CDFA /* MJFoundation.m in Sources */ = {isa = PBXBuildFile; fileRef = C54DD0FB1F064D3C00E8CDFA /* MJFoundation.m */; };
 		C54DD10E1F064D3C00E8CDFA /* MJProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = C54DD0FD1F064D3C00E8CDFA /* MJProperty.m */; };
@@ -31,6 +28,9 @@
 		C54DD1131F064D3C00E8CDFA /* NSObject+MJKeyValue.m in Sources */ = {isa = PBXBuildFile; fileRef = C54DD1071F064D3C00E8CDFA /* NSObject+MJKeyValue.m */; };
 		C54DD1141F064D3C00E8CDFA /* NSObject+MJProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = C54DD1091F064D3C00E8CDFA /* NSObject+MJProperty.m */; };
 		C54DD1151F064D3C00E8CDFA /* NSString+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = C54DD10B1F064D3C00E8CDFA /* NSString+MJExtension.m */; };
+		C56DD4ED1F0CBC0A00018F58 /* MKRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = C56DD4EC1F0CBC0A00018F58 /* MKRouter.m */; };
+		C56DD4F31F0CBC1C00018F58 /* MKRouterHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C56DD4F01F0CBC1C00018F58 /* MKRouterHelper.m */; };
+		C56DD4F41F0CBC1C00018F58 /* MKUITools.m in Sources */ = {isa = PBXBuildFile; fileRef = C56DD4F21F0CBC1C00018F58 /* MKUITools.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,10 +67,6 @@
 		C54DD0BF1F039CD900E8CDFA /* MKRouterDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MKRouterDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C54DD0C31F039CD900E8CDFA /* MKRouterDemoUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MKRouterDemoUITests.m; sourceTree = "<group>"; };
 		C54DD0C51F039CD900E8CDFA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C54DD0D31F039EDD00E8CDFA /* MKRouter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRouter.h; sourceTree = "<group>"; };
-		C54DD0D41F039EDD00E8CDFA /* MKRouter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRouter.m; sourceTree = "<group>"; };
-		C54DD0D91F03B33500E8CDFA /* MKUITools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKUITools.h; sourceTree = "<group>"; };
-		C54DD0DA1F03B33500E8CDFA /* MKUITools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKUITools.m; sourceTree = "<group>"; };
 		C54DD0E61F05FBE900E8CDFA /* MKBlue_VC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKBlue_VC.h; sourceTree = "<group>"; };
 		C54DD0E71F05FBE900E8CDFA /* MKBlue_VC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKBlue_VC.m; sourceTree = "<group>"; };
 		C54DD0E91F05FC0F00E8CDFA /* MKRed_VC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRed_VC.h; sourceTree = "<group>"; };
@@ -78,8 +74,6 @@
 		C54DD0EC1F05FF1400E8CDFA /* MKBase_VC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKBase_VC.h; sourceTree = "<group>"; };
 		C54DD0ED1F05FF1400E8CDFA /* MKBase_VC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKBase_VC.m; sourceTree = "<group>"; };
 		C54DD0EF1F05FF6700E8CDFA /* MKConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKConst.h; sourceTree = "<group>"; };
-		C54DD0F21F06425600E8CDFA /* MKRouterHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRouterHelper.h; sourceTree = "<group>"; };
-		C54DD0F31F06425600E8CDFA /* MKRouterHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRouterHelper.m; sourceTree = "<group>"; };
 		C54DD0F71F064D3C00E8CDFA /* MJExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJExtension.h; sourceTree = "<group>"; };
 		C54DD0F81F064D3C00E8CDFA /* MJExtensionConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJExtensionConst.h; sourceTree = "<group>"; };
 		C54DD0F91F064D3C00E8CDFA /* MJExtensionConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJExtensionConst.m; sourceTree = "<group>"; };
@@ -101,6 +95,12 @@
 		C54DD1091F064D3C00E8CDFA /* NSObject+MJProperty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+MJProperty.m"; sourceTree = "<group>"; };
 		C54DD10A1F064D3C00E8CDFA /* NSString+MJExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MJExtension.h"; sourceTree = "<group>"; };
 		C54DD10B1F064D3C00E8CDFA /* NSString+MJExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MJExtension.m"; sourceTree = "<group>"; };
+		C56DD4EB1F0CBC0A00018F58 /* MKRouter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRouter.h; sourceTree = "<group>"; };
+		C56DD4EC1F0CBC0A00018F58 /* MKRouter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRouter.m; sourceTree = "<group>"; };
+		C56DD4EF1F0CBC1C00018F58 /* MKRouterHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKRouterHelper.h; sourceTree = "<group>"; };
+		C56DD4F01F0CBC1C00018F58 /* MKRouterHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKRouterHelper.m; sourceTree = "<group>"; };
+		C56DD4F11F0CBC1C00018F58 /* MKUITools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKUITools.h; sourceTree = "<group>"; };
+		C56DD4F21F0CBC1C00018F58 /* MKUITools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKUITools.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,10 +152,11 @@
 			isa = PBXGroup;
 			children = (
 				C54DD0F61F064D3C00E8CDFA /* MJExtension */,
-				C54DD0E51F05F8DF00E8CDFA /* testVC */,
-				C54DD0D21F039EA600E8CDFA /* MKRouter */,
+				C56DD4EA1F0CBC0A00018F58 /* MKRouter */,
+				C56DD4EE1F0CBC1C00018F58 /* MKRouterHelper */,
 				C54DD0D11F039E6E00E8CDFA /* Origin */,
 				C54DD09E1F039CD800E8CDFA /* Supporting Files */,
+				C54DD0E51F05F8DF00E8CDFA /* testVC */,
 			);
 			path = MKRouterDemo;
 			sourceTree = "<group>";
@@ -202,19 +203,6 @@
 			name = Origin;
 			sourceTree = "<group>";
 		};
-		C54DD0D21F039EA600E8CDFA /* MKRouter */ = {
-			isa = PBXGroup;
-			children = (
-				C54DD0D91F03B33500E8CDFA /* MKUITools.h */,
-				C54DD0DA1F03B33500E8CDFA /* MKUITools.m */,
-				C54DD0D31F039EDD00E8CDFA /* MKRouter.h */,
-				C54DD0D41F039EDD00E8CDFA /* MKRouter.m */,
-				C54DD0F21F06425600E8CDFA /* MKRouterHelper.h */,
-				C54DD0F31F06425600E8CDFA /* MKRouterHelper.m */,
-			);
-			path = MKRouter;
-			sourceTree = "<group>";
-		};
 		C54DD0E51F05F8DF00E8CDFA /* testVC */ = {
 			isa = PBXGroup;
 			children = (
@@ -254,6 +242,26 @@
 				C54DD10B1F064D3C00E8CDFA /* NSString+MJExtension.m */,
 			);
 			path = MJExtension;
+			sourceTree = "<group>";
+		};
+		C56DD4EA1F0CBC0A00018F58 /* MKRouter */ = {
+			isa = PBXGroup;
+			children = (
+				C56DD4EB1F0CBC0A00018F58 /* MKRouter.h */,
+				C56DD4EC1F0CBC0A00018F58 /* MKRouter.m */,
+			);
+			path = MKRouter;
+			sourceTree = "<group>";
+		};
+		C56DD4EE1F0CBC1C00018F58 /* MKRouterHelper */ = {
+			isa = PBXGroup;
+			children = (
+				C56DD4EF1F0CBC1C00018F58 /* MKRouterHelper.h */,
+				C56DD4F01F0CBC1C00018F58 /* MKRouterHelper.m */,
+				C56DD4F11F0CBC1C00018F58 /* MKUITools.h */,
+				C56DD4F21F0CBC1C00018F58 /* MKUITools.m */,
+			);
+			path = MKRouterHelper;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -400,14 +408,14 @@
 				C54DD10D1F064D3C00E8CDFA /* MJFoundation.m in Sources */,
 				C54DD1151F064D3C00E8CDFA /* NSString+MJExtension.m in Sources */,
 				C54DD10E1F064D3C00E8CDFA /* MJProperty.m in Sources */,
-				C54DD0F41F06425600E8CDFA /* MKRouterHelper.m in Sources */,
-				C54DD0DB1F03B33500E8CDFA /* MKUITools.m in Sources */,
 				C54DD0EE1F05FF1400E8CDFA /* MKBase_VC.m in Sources */,
+				C56DD4ED1F0CBC0A00018F58 /* MKRouter.m in Sources */,
 				C54DD0A31F039CD800E8CDFA /* AppDelegate.m in Sources */,
 				C54DD1141F064D3C00E8CDFA /* NSObject+MJProperty.m in Sources */,
-				C54DD0D51F039EDD00E8CDFA /* MKRouter.m in Sources */,
+				C56DD4F31F0CBC1C00018F58 /* MKRouterHelper.m in Sources */,
 				C54DD0A01F039CD800E8CDFA /* main.m in Sources */,
 				C54DD1111F064D3C00E8CDFA /* NSObject+MJClass.m in Sources */,
+				C56DD4F41F0CBC1C00018F58 /* MKUITools.m in Sources */,
 				C54DD0E81F05FBE900E8CDFA /* MKBlue_VC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
