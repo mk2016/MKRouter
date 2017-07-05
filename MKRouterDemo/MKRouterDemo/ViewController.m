@@ -87,7 +87,13 @@
             NSLog(@"result : %@", result);
         }];
     }else{
-        [[MKRouterHelper sharedInstance] actionWithRoute:self.dataSource[indexPath.row] param:nil onVC:self block:^(id result) {
+        NSDictionary *dic = @{
+                              @"key1" : @"value1",
+                              @"key2" : @(2),
+                              @"key3" : @3,
+                              @"id": @4
+                              };
+        [[MKRouterHelper sharedInstance] actionWithRoute:self.dataSource[indexPath.row] param:dic onVC:self block:^(id result) {
             
         }];
     }

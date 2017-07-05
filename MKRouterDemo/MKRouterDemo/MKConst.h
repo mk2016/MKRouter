@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import "MKUITools.h"
-#import "NSString+MKAdd.h"
 #import "MKRouter.h"
 #import "MKRouterHelper.h"
 #import "MJExtension.h"

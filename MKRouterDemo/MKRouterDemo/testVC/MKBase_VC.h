@@ -11,6 +11,6 @@
 @interface MKBase_VC : UIViewController
 
 @property (nonatomic, strong) UILabel *labText;
-@property (nonatomic, strong) NSDictionary *routeParamDic;
+@property (nonatomic, strong) NSDictionary *routeParams;
 
 @end

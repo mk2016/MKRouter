@@ -15,24 +15,17 @@
 
 @implementation MKBase_VC
 
-//- (void)setMk_routeParams:(NSDictionary *)params{
-//    if (params) {
-//        NSLog(@"setParams : %@", params);
-//        
-//        NSString *titleStr = params[@"title"];
-//        if (titleStr && titleStr.length > 0) {
-//            self.title = titleStr;
-//        }
-//        
-//        if ([params objectForKey:@"param"]) {
-//            NSString *jsonParam = [params objectForKey:@"param"];
-//            NSDictionary *dic = [jsonParam mk_jsonString2Dictionary];
-//            if (dic && [dic isKindOfClass:[NSDictionary class]]) {
-//                self.routeParamDic = dic;
-//            }
-//        }
-//    }
-//}
+- (void)setMk_routeParams:(NSDictionary *)params{
+    if (params) {
+        NSLog(@"setParams : %@", params);
+        
+        NSString *titleStr = params[@"title"];
+        if (titleStr && titleStr.length > 0) {
+            self.title = titleStr;
+        }
+        self.routeParams = params;
+    }
+}
 
 
 - (void)viewDidLoad {
@@ -45,10 +38,9 @@
     self.labText.text = @"无参数";
     [self.view addSubview:self.labText];
     
-    if (self.mk_routeParams) {
-        NSLog(@"%@",self.mk_routeParams.description);
-        NSString *param = [self.mk_routeParams objectForKey:@"param"];
-        self.labText.text = param;
+    if (self.routeParams) {
+//        NSString *param = [self.mk_routeParams objectForKey:@"param"];
+        self.labText.text = self.routeParams.description;
     }
     
 }

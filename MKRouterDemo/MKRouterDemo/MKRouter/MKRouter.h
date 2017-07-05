@@ -68,7 +68,7 @@ typedef void (^MKBlock)(id result);
 @end
 
 /** URL Encode Decode */
-@interface NSString(MKAdd)
+@interface NSString(MKRouter)
 /** 对字符串进行URLEncode */
 - (NSString *)mk_stringByURLEncode;
 /** 对字符串进行URLDecode */
@@ -76,3 +76,9 @@ typedef void (^MKBlock)(id result);
 - (id)mk_jsonString2Dictionary;
 
 @end
+
+@interface NSDictionary (MKRouter)
++ (NSDictionary *)mk_dictionaryWithJson:(id)json;
+@end
+
+

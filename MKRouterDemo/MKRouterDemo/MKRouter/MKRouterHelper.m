@@ -113,12 +113,32 @@ static MKRouterHelper *sharedInstance = nil;
 
 
 - (NSString *)route:(NSString *)route appendParam:(id)param{
-    //    NSDictionary *params = [[MKRouter sharedInstance] paramsInRoute:route];
     if (route && param) {
-        NSString *encodeStr = [[param mj_JSONString] mk_stringByURLEncode];
-        if (encodeStr) {
-            NSString *paramStr = [NSString stringWithFormat:@"?param=%@",encodeStr];
-            route = [route stringByAppendingString:paramStr];
+        NSDictionary *paramDic = [NSDictionary mk_dictionaryWithJson:param];
+        NSAssert(paramDic, @"param 转 dictionary error");
+        
+        NSRange range = [route rangeOfString:@"?"];
+        if (range.location != NSNotFound) {
+            NSString *routeParamStr = [route substringFromIndex:range.location+range.length];
+            NSArray *ary = [routeParamStr componentsSeparatedByString:@"="];
+            if (ary && ary.count == 2) {
+                NSString *routeParamValue = [ary.lastObject mk_stringByURLDecode];
+                NSDictionary *dic = [routeParamValue mk_jsonString2Dictionary];
+                if (dic && [dic isKindOfClass:[NSDictionary class]]) {
+                    NSMutableDictionary *tempDic = [NSMutableDictionary dictionaryWithDictionary:dic];
+                    [tempDic addEntriesFromDictionary:paramDic];
+                    NSString *encodeStr = [[tempDic mj_JSONString] mk_stringByURLEncode];
+                    if (encodeStr) {
+                        route = [NSString stringWithFormat:@"%@?param=%@", [route substringToIndex:range.location], encodeStr];
+                    }
+                }
+            }
+        }else{
+            NSString *encodeStr = [[param mj_JSONString] mk_stringByURLEncode];
+            if (encodeStr) {
+                NSString *paramStr = [NSString stringWithFormat:@"?param=%@",encodeStr];
+                route = [route stringByAppendingString:paramStr];
+            }
         }
     }
     return route;
