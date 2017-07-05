@@ -33,6 +33,8 @@
 		C56DD5081F0CBF7600018F58 /* MKRed_VC.m in Sources */ = {isa = PBXBuildFile; fileRef = C56DD5051F0CBF7600018F58 /* MKRed_VC.m */; };
 		C56DD50B1F0CBFAC00018F58 /* MKSBGreen_VC.m in Sources */ = {isa = PBXBuildFile; fileRef = C56DD50A1F0CBFAC00018F58 /* MKSBGreen_VC.m */; };
 		C56DD50E1F0CBFC800018F58 /* MKSBGray_VC.m in Sources */ = {isa = PBXBuildFile; fileRef = C56DD50D1F0CBFC800018F58 /* MKSBGray_VC.m */; };
+		C56DD5111F0CD5C200018F58 /* MKTestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C56DD5101F0CD5C200018F58 /* MKTestModel.m */; };
+		C56DD5141F0CDD6000018F58 /* NSObject+MKJsonAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = C56DD5131F0CDD6000018F58 /* NSObject+MKJsonAdd.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -107,6 +109,10 @@
 		C56DD50A1F0CBFAC00018F58 /* MKSBGreen_VC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKSBGreen_VC.m; sourceTree = "<group>"; };
 		C56DD50C1F0CBFC800018F58 /* MKSBGray_VC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKSBGray_VC.h; sourceTree = "<group>"; };
 		C56DD50D1F0CBFC800018F58 /* MKSBGray_VC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKSBGray_VC.m; sourceTree = "<group>"; };
+		C56DD50F1F0CD5C200018F58 /* MKTestModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKTestModel.h; sourceTree = "<group>"; };
+		C56DD5101F0CD5C200018F58 /* MKTestModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKTestModel.m; sourceTree = "<group>"; };
+		C56DD5121F0CDD6000018F58 /* NSObject+MKJsonAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+MKJsonAdd.h"; sourceTree = "<group>"; };
+		C56DD5131F0CDD6000018F58 /* NSObject+MKJsonAdd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+MKJsonAdd.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -205,6 +211,8 @@
 				C54DD0AC1F039CD800E8CDFA /* LaunchScreen.storyboard */,
 				C54DD0AF1F039CD800E8CDFA /* Info.plist */,
 				C54DD0EF1F05FF6700E8CDFA /* MKConst.h */,
+				C56DD50F1F0CD5C200018F58 /* MKTestModel.h */,
+				C56DD5101F0CD5C200018F58 /* MKTestModel.m */,
 			);
 			name = Origin;
 			sourceTree = "<group>";
@@ -253,6 +261,8 @@
 				C56DD4F01F0CBC1C00018F58 /* MKRouterHelper.m */,
 				C56DD4F11F0CBC1C00018F58 /* MKUITools.h */,
 				C56DD4F21F0CBC1C00018F58 /* MKUITools.m */,
+				C56DD5121F0CDD6000018F58 /* NSObject+MKJsonAdd.h */,
+				C56DD5131F0CDD6000018F58 /* NSObject+MKJsonAdd.m */,
 			);
 			path = MKRouterHelper;
 			sourceTree = "<group>";
@@ -422,7 +432,9 @@
 				C54DD10E1F064D3C00E8CDFA /* MJProperty.m in Sources */,
 				C56DD50B1F0CBFAC00018F58 /* MKSBGreen_VC.m in Sources */,
 				C56DD4ED1F0CBC0A00018F58 /* MKRouter.m in Sources */,
+				C56DD5141F0CDD6000018F58 /* NSObject+MKJsonAdd.m in Sources */,
 				C54DD0A31F039CD800E8CDFA /* AppDelegate.m in Sources */,
+				C56DD5111F0CD5C200018F58 /* MKTestModel.m in Sources */,
 				C54DD1141F064D3C00E8CDFA /* NSObject+MJProperty.m in Sources */,
 				C56DD4F31F0CBC1C00018F58 /* MKRouterHelper.m in Sources */,
 				C54DD0A01F039CD800E8CDFA /* main.m in Sources */,

@@ -84,9 +84,4 @@ typedef void (^MKBlock)(id result);
 
 @end
 
-@interface NSDictionary (MKRouter)
-/** obj -> dictionary */
-+ (NSDictionary *)mk_dictionaryWithJson:(id)json;
-@end
-
 

@@ -72,6 +72,7 @@ static MKRouterHelper *sharedInstance = nil;
 
 
 - (void)actionWithRoute:(NSString *)route param:(id)param onVC:(UIViewController *)currentVC block:(MKBlock)block{
+    BOOL transitionMode = route.mk_transitionModePresent;
     if (route == nil || route.length == 0) {
         return;
     }
@@ -99,12 +100,12 @@ static MKRouterHelper *sharedInstance = nil;
         if ([ret isKindOfClass:[UIViewController class]]) {
             UIViewController *vc = (UIViewController *)ret;
             vc.mk_block = block;
-            if (param[@"transitionMode"]) {
-                if ([param[@"transitionMode"] isEqualToString:@"present"]) {
-                    [currentVC presentViewController:vc animated:YES completion:nil];
-                }
+            if (transitionMode){
+                [currentVC presentViewController:vc animated:YES completion:nil];
+                NSLog(@"transition mode present");
+            }else{
+                [currentVC.navigationController pushViewController:vc animated:YES];
             }
-            [currentVC.navigationController pushViewController:vc animated:YES];
         }else{
             MKRouterBlock routeBlock = ret;
             if (block) {

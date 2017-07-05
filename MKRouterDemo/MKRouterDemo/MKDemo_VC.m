@@ -16,6 +16,7 @@
 @interface MKDemo_VC ()<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataSource;
+@property (nonatomic, strong) NSMutableArray *headTitles;
 @end
 
 @implementation MKDemo_VC
@@ -26,21 +27,38 @@
     
     [[MKRouterHelper sharedInstance] registerRoutes];
     
-    [self.dataSource addObject:@"/vc/blue"];
-    [self.dataSource addObject:@"MKRouterDemo://vc/red"];
-    [self.dataSource addObject:kRoute_vc_green];
-    [self.dataSource addObject:kRoute_vc_gray];
+    self.headTitles = @[].mutableCopy;
     
+    {
+        NSMutableArray *ary = @[].mutableCopy;
+        [ary addObject:@"/vc/blue"];
+        [ary addObject:@"/sb/Main/sbid_MKSBGreen_VC"];
+        [ary addObject:@"MKRouterDemo://vc/red"];
+        [ary addObject:@"MKRouterDemo://sb/Main/sbid_MKSBGray_VC"];
+        [self.dataSource addObject:ary];
+        [self.headTitles addObject:@"simple route"];
+    }
     
-    [self.dataSource addObject:@"/vc/red?param=%7B%22id%22%3A%22118%22%2C%22trackValue%22%3A%22100002%22%7D"];
-    [self.dataSource addObject:@"/redirection/test"];
-    [self.dataSource addObject:@"/redirection/demo?param=%7B%22id%22%3A%22118%22%2C%22trackValue%22%3A%22100002%22%7D"];
-    [self.dataSource addObject:@"/block/alert/"];
-    [self.dataSource addObject:@"/block/block/"];
-    [self.dataSource addObject:@"/vc/red/7777/ppp"];
+    //param
+    {
+        NSMutableArray *ary = @[].mutableCopy;
+        [ary addObject:kRoute_vc_blue];
+        [ary addObject:kRoute_vc_red];
+        [ary addObject:kRoute_vc_green];
+        [ary addObject:kRoute_vc_gray];
+        [self.dataSource addObject:ary];
+        [self.headTitles addObject:@"param route"];
+    }
     
-    [self.dataSource addObject:@"/vc/blue/987/test"];
-    [self.dataSource addObject:@"/red/blue/888?param=%7B%22id%22%3A%22118%22%2C%22trackValue%22%3A%22100002%22%7D"];
+//    [self.dataSource addObject:@"/vc/red?param=%7B%22id%22%3A%22118%22%2C%22trackValue%22%3A%22100002%22%7D"];
+//    [self.dataSource addObject:@"/redirection/test"];
+//    [self.dataSource addObject:@"/redirection/demo?param=%7B%22id%22%3A%22118%22%2C%22trackValue%22%3A%22100002%22%7D"];
+//    [self.dataSource addObject:@"/block/alert/"];
+//    [self.dataSource addObject:@"/block/block/"];
+//    [self.dataSource addObject:@"/vc/red/7777/ppp"];
+//    
+//    [self.dataSource addObject:@"/vc/blue/987/test"];
+//    [self.dataSource addObject:@"/red/blue/888?param=%7B%22id%22%3A%22118%22%2C%22trackValue%22%3A%22100002%22%7D"];
     
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, MKSCREEN_WIDTH, MKSCREEN_HEIGHT) style:UITableViewStyleGrouped];
     self.tableView.dataSource = self;
@@ -59,16 +77,44 @@
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
     }
-    cell.textLabel.text = self.dataSource[indexPath.row];
+    cell.textLabel.numberOfLines = 0;
+    cell.textLabel.text = self.dataSource[indexPath.section][indexPath.row];
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    [[MKRouterHelper sharedInstance] actionWithRoute:self.dataSource[indexPath.row] param:nil onVC:self block:^(id result) {
-        
-    }];
+    NSString *route = self.dataSource[indexPath.section][indexPath.row];
+    id param = nil;
+    
+    if (indexPath.section == 1) {
+        if (indexPath.row == 0 || indexPath.row == 1) {
+            NSDictionary *dic = @{
+                                  @"key1" : @"value1",
+                                  @"key2" : @(2),
+                                  @"key3" : @3,
+                                  @"id": @4
+                                  };
+            param = dic;
+        }else{
+            MKTestModel *model = [[MKTestModel alloc] init];
+            model.name = @"小明";
+            model.age = 14;
+            model.sex = YES;
+            model.height = 178.4f;
+            param = model;
+        }
+    }
+    
+    
+    
+    [[MKRouterHelper sharedInstance] actionWithRoute:route param:param onVC:self block:nil];
+    
+    
+    
+    
+    
     
 //    if (indexPath.row <= 3) {
 //        [[MKRouterHelper sharedInstance] actionWithRoute:self.dataSource[indexPath.row] param:nil onVC:self block:^(id result) {
@@ -110,15 +156,34 @@
     
 }
 
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, MKSCREEN_WIDTH, 30)];
+    UILabel *lab = [[UILabel alloc] initWithFrame:CGRectMake(16, 0, MKSCREEN_WIDTH-32, 30)];
+    lab.text = self.headTitles[section];
+    lab.font = [UIFont systemFontOfSize:14];
+    lab.textColor = [UIColor grayColor];
+    [view addSubview:lab];
+    return view;
+}
+
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
     return 44;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 16;
+    return 30;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    return 0.1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return [self.dataSource[section] count];
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return self.dataSource.count;
 }
 

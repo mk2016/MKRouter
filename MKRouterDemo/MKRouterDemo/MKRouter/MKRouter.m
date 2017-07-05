@@ -433,34 +433,4 @@ static char kAssociatedBlockKey;
 }
 @end
 
-@implementation NSDictionary (MKRouter)
-+ (NSDictionary *)mk_dictionaryWithJson:(id)json{
-    if (!json || json == (id)kCFNull) return nil;
-    
-    if ([json isKindOfClass:[NSDictionary class]]) {
-        return json;
-    }
-    
-    NSData *jsonData = nil;
-    if ([json isKindOfClass:[NSString class]]) {
-        jsonData = [(NSString *)json dataUsingEncoding:NSUTF8StringEncoding];
-    }else if ([jsonData isKindOfClass:[NSData class]]){
-        jsonData = json;
-    }
-    
-    NSDictionary *dic = nil;
-    if (jsonData) {
-        NSError *error;
-        dic = [NSJSONSerialization JSONObjectWithData:jsonData options:kNilOptions error:&error];
-        if (error) {
-            NSLog(@"json parsing failure:%@", error);
-            dic = nil;
-        }
-    }
-    if (dic && [dic isKindOfClass:[NSDictionary class]]) {
-        return dic;
-    }
-    return nil;
-}
 
-@end

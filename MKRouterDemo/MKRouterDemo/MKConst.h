@@ -11,6 +11,8 @@
 #import "MKRouter.h"
 #import "MKRouterHelper.h"
 #import "MJExtension.h"
+#import "MKTestModel.h"
+#import "NSObject+MKJsonAdd.h"
 
 #define MKSCREEN_WIDTH      [UIScreen mainScreen].bounds.size.width
 #define MKSCREEN_HEIGHT     [UIScreen mainScreen].bounds.size.height
