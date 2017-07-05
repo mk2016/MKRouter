@@ -11,6 +11,8 @@
 #import "MKConst.h"
 #import "MKRed_VC.h"
 #import "MKBlue_VC.h"
+#import "MKSBGreen_VC.h"
+#import "MKSBGray_VC.h"
 
 
 #define MKBlockExec(block, ...) if (block) { block(__VA_ARGS__); };
@@ -38,9 +40,13 @@ static MKRouterHelper *sharedInstance = nil;
 
 - (void)registerRoutes{
     [[MKRouter sharedInstance] map:kRoute_vc_blue toControllerClass:[MKBlue_VC class]];
+    [[MKRouter sharedInstance] map:kRoute_vc_red toControllerClass:[MKRed_VC class]];
+    [[MKRouter sharedInstance] map:kRoute_vc_green toControllerClass:[MKSBGreen_VC class]];
+    [[MKRouter sharedInstance] map:kRoute_vc_gray toControllerClass:[MKSBGray_VC class]];
+    
+    
     [[MKRouter sharedInstance] map:kRoute_vc_blue_userid toControllerClass:[MKBlue_VC class]];
 
-    [[MKRouter sharedInstance] map:kRoute_vc_red toControllerClass:[MKRed_VC class]];
     [[MKRouter sharedInstance] map:kRoute_vc_userid toControllerClass:[MKRed_VC class]];
 
     

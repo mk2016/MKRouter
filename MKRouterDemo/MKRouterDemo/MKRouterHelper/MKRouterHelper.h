@@ -12,8 +12,14 @@
 
 
 static NSString * const kRoute_vc_blue          = @"/vc/blue";
-static NSString * const kRoute_vc_blue_userid   = @"/vc/blue/:userid/test";
 static NSString * const kRoute_vc_red           = @"/vc/red";
+static NSString * const kRoute_vc_green         = @"/sb/Main/sbid_MKSBGreen_VC";
+static NSString * const kRoute_vc_gray          = @"/sb/Main/sbid_MKSBGray_VC";
+
+
+
+
+static NSString * const kRoute_vc_blue_userid   = @"/vc/blue/:userid/test";
 static NSString * const kRoute_vc_userid        = @"/vc/red/:userid/ppp";
 
 static NSString * const kRoute_redirection_test = @"/redirection/test";
