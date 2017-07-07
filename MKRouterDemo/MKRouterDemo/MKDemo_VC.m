@@ -30,24 +30,58 @@
     self.headTitles = @[].mutableCopy;
     
     {
+        [self.headTitles addObject:@"simple route"];
         NSMutableArray *ary = @[].mutableCopy;
         [ary addObject:@"/vc/blue"];
         [ary addObject:@"/sb/Main/sbid_MKSBGreen_VC"];
         [ary addObject:@"MKRouterDemo://vc/red"];
         [ary addObject:@"MKRouterDemo://sb/Main/sbid_MKSBGray_VC"];
         [self.dataSource addObject:ary];
-        [self.headTitles addObject:@"simple route"];
     }
-    
-    //param
     {
+        [self.headTitles addObject:@"param route"];
         NSMutableArray *ary = @[].mutableCopy;
         [ary addObject:kRoute_vc_blue];
         [ary addObject:kRoute_vc_red];
         [ary addObject:kRoute_vc_green];
         [ary addObject:kRoute_vc_gray];
         [self.dataSource addObject:ary];
-        [self.headTitles addObject:@"param route"];
+    }
+    {
+        [self.headTitles addObject:@"path param"];
+        NSMutableArray *ary = @[].mutableCopy;
+        [ary addObject:@"/vc/blue/1111"];
+        [ary addObject:@"/vc/red/2222/xiaoming"];
+        [ary addObject:@"/sb/Main/sbid_MKSBGreen_VC/3333/gogogo"];
+        [ary addObject:@"/sb/Main/sbid_MKSBGray_VC/4444/first/小明/second"];
+        [self.dataSource addObject:ary];
+    }
+    
+    {
+        [self.headTitles addObject:@"hybrid param"];
+        NSMutableArray *ary = @[].mutableCopy;
+        [ary addObject:@"/vc/blue/1111?param=%7B%22id%22%3A%22118%22%2C%22trackValue%22%3A%22100002%22%7D"];
+        [ary addObject:@"/vc/red/2222/xiaoming?param=%7B%22id%22%3A%22118%22%2C%22trackValue%22%3A%22100002%22%7D"];
+        [ary addObject:@"/sb/Main/sbid_MKSBGreen_VC/3333/gogogo?param=%7B%22id%22%3A%22118%22%2C%22trackValue%22%3A%22100002%22%7D"];
+        [ary addObject:@"/sb/Main/sbid_MKSBGray_VC/4444/first/小明/second?param=%7B%22id%22%3A%22118%22%2C%22trackValue%22%3A%22100002%22%7D"];
+        [self.dataSource addObject:ary];
+    }
+    {
+        [self.headTitles addObject:@"vc action block"];
+        NSMutableArray *ary = @[].mutableCopy;
+        [ary addObject:kRoute_vc_blue];
+        [ary addObject:kRoute_vc_red];
+        [ary addObject:kRoute_vc_green];
+        [ary addObject:kRoute_vc_gray];
+        [self.dataSource addObject:ary];
+    }
+    {
+        [self.headTitles addObject:@"block route"];
+        NSMutableArray *ary = @[].mutableCopy;
+        [ary addObject:@"/block/alert/7777"];
+        [ary addObject:kRoute_block_nav];
+        [ary addObject:@"/block/call/tel/10086"];
+        [self.dataSource addObject:ary];
     }
     
 //    [self.dataSource addObject:@"/vc/red?param=%7B%22id%22%3A%22118%22%2C%22trackValue%22%3A%22100002%22%7D"];
@@ -86,9 +120,9 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     NSString *route = self.dataSource[indexPath.section][indexPath.row];
-    id param = nil;
     
-    if (indexPath.section == 1) {
+    if (indexPath.section == 1 || indexPath.section == 3) {
+        id param = nil;
         if (indexPath.row == 0 || indexPath.row == 1) {
             NSDictionary *dic = @{
                                   @"key1" : @"value1",
@@ -105,11 +139,25 @@
             model.height = 178.4f;
             param = model;
         }
+        [[MKRouterHelper sharedInstance] actionWithRoute:route param:param onVC:self block:nil];
+
+    }else if (indexPath.section == 4){
+        [[MKRouterHelper sharedInstance] actionWithRoute:route param:nil onVC:self block:^(NSDictionary *result) {
+            NSString *message = result ? result.description : @"no block param";
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"block param" message:message delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [alert show];
+        }];
+    }else if ([self.headTitles[indexPath.section] isEqualToString:@"block route"]){
+        [[MKRouterHelper sharedInstance] actionWithRoute:route param:nil onVC:self block:^(id result) {
+            NSLog(@"result : %@",result);
+        }];
+    }else{
+        [[MKRouterHelper sharedInstance] actionWithRoute:route param:nil onVC:self block:nil];
     }
     
     
     
-    [[MKRouterHelper sharedInstance] actionWithRoute:route param:param onVC:self block:nil];
+    
     
     
     

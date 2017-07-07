@@ -11,9 +11,6 @@
 
 @implementation MKUITools
 
-+ (id)getVCFromStoryboard:(NSString *)storyboard identify:(NSString *)identify{
-    return [[UIStoryboard storyboardWithName:storyboard bundle:nil] instantiateViewControllerWithIdentifier:identify];
-}
 
 #pragma mark - ***** top View ******
 + (UIView *)getTopView{
@@ -113,10 +110,5 @@
     return topVC;
 }
 
-+ (void)callTelephone:(NSString *)phone showAlert:(BOOL)showAlert{
-    NSString *cmd = showAlert ? @"telprompt" : @"tel";
-    NSString *str = [NSString stringWithFormat:@"%@://%@", cmd, phone];
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
-}
 
 @end

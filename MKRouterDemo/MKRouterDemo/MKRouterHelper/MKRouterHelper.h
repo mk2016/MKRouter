@@ -16,18 +16,24 @@ static NSString * const kRoute_vc_red           = @"/vc/red";
 static NSString * const kRoute_vc_green         = @"/sb/Main/sbid_MKSBGreen_VC";
 static NSString * const kRoute_vc_gray          = @"/sb/Main/sbid_MKSBGray_VC";
 
+static NSString * const kRoute_vc_path_blue     = @"/vc/blue/:userid";
+static NSString * const kRoute_vc_path_red      = @"/vc/red/:userid/:userName";
+static NSString * const kRoute_vc_path_green    = @"/sb/Main/sbid_MKSBGreen_VC/:userid/gogogo";
+static NSString * const kRoute_vc_path_gray     = @"/sb/Main/sbid_MKSBGray_VC/:userid/first/:username/second";
 
 
 
-static NSString * const kRoute_vc_blue_userid   = @"/vc/blue/:userid/test";
-static NSString * const kRoute_vc_userid        = @"/vc/red/:userid/ppp";
+static NSString * const kRoute_block_alert      = @"/block/alert/:userid";
+static NSString * const kRoute_block_nav        = @"/block/present/nav";
+static NSString * const kRoute_block_tel        = @"/block/call/tel/:number";
+
+
 
 static NSString * const kRoute_redirection_test = @"/redirection/test";
 static NSString * const kRoute_redirection_demo = @"/redirection/demo";
 static NSString * const kRoute_redirection_blue = @"/red/blue/:userid";
 
-static NSString * const kRoute_block_alert      = @"/block/alert";
-static NSString * const kRoute_block_block      = @"/block/block";
+
 
 @interface MKRouterHelper : NSObject
 

@@ -16,7 +16,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    self.title = @"green";
+
+    if (self.routeParams) {
+        if (self.routeParams[@"username"]) {
+            self.title = self.routeParams[@"username"];
+        }
+    }
 }
 
 - (void)didReceiveMemoryWarning {

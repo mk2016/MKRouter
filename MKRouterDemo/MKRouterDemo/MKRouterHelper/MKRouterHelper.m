@@ -15,7 +15,6 @@
 #import "MKSBGray_VC.h"
 
 
-#define MKBlockExec(block, ...) if (block) { block(__VA_ARGS__); };
 
 @implementation MKRouterHelper
 static const NSString * kMKRouteCustomBlockKey = @"customBlock";
@@ -44,29 +43,50 @@ static MKRouterHelper *sharedInstance = nil;
     [[MKRouter sharedInstance] map:kRoute_vc_green toControllerClass:[MKSBGreen_VC class]];
     [[MKRouter sharedInstance] map:kRoute_vc_gray toControllerClass:[MKSBGray_VC class]];
     
+    [[MKRouter sharedInstance] map:kRoute_vc_path_blue toControllerClass:[MKBlue_VC class]];
+    [[MKRouter sharedInstance] map:kRoute_vc_path_red toControllerClass:[MKRed_VC class]];
+    [[MKRouter sharedInstance] map:kRoute_vc_path_green toControllerClass:[MKSBGreen_VC class]];
+    [[MKRouter sharedInstance] map:kRoute_vc_path_gray toControllerClass:[MKSBGray_VC class]];
     
-    [[MKRouter sharedInstance] map:kRoute_vc_blue_userid toControllerClass:[MKBlue_VC class]];
 
-    [[MKRouter sharedInstance] map:kRoute_vc_userid toControllerClass:[MKRed_VC class]];
-
-    
-    [[MKRouter sharedInstance] map:kRoute_redirection_test toRedirection:kRoute_vc_red];
-    [[MKRouter sharedInstance] map:kRoute_redirection_demo toRedirection:kRoute_redirection_test];
-    [[MKRouter sharedInstance] map:kRoute_redirection_blue toRedirection:kRoute_vc_blue_userid];
-    
     [[MKRouter sharedInstance] map:kRoute_block_alert toBlock:^id(id params) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"title" message:[params description] delegate:self cancelButtonTitle:@"NO" otherButtonTitles:@"YES", nil];
-        [alert show];
-        return params;
-    }];
-    
-    [[MKRouter sharedInstance] map:kRoute_block_block toBlock:^id(id params) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"title" message:[params description] delegate:self cancelButtonTitle:@"NO" otherButtonTitles:@"YES", nil];
+        NSLog(@"params: %@", params);
+        NSString *message = @"message";
+        if ([params objectForKey:@"userid"]) {
+            message = [NSString stringWithFormat:@"userid : %@", [params objectForKey:@"userid"]];
+        }
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"title" message:message delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
         MKBlock customBlock = [params objectForKey:kMKRouteCustomBlockKey];
         MKBlockExec(customBlock, @"block success");
         return params;
     }];
+
+    [[MKRouter sharedInstance] map:kRoute_block_nav toBlock:^id(id params) {
+        NSLog(@"params: %@", params);
+        MKBlock customBlock = [params objectForKey:kMKRouteCustomBlockKey];
+        MKBlockExec(customBlock, params);
+        return params;
+    }];
+    
+    [[MKRouter sharedInstance] map:kRoute_block_tel toBlock:^id(id params) {
+        NSLog(@"params: %@", params);
+        if ([params objectForKey:@"number"]) {
+            NSString *phone = [params objectForKey:@"number"];
+            NSString *str = [NSString stringWithFormat:@"tel://%@", phone];
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
+        }
+        MKBlock customBlock = [params objectForKey:kMKRouteCustomBlockKey];
+        MKBlockExec(customBlock, params);
+        return params;
+    }];
+    
+    [[MKRouter sharedInstance] map:kRoute_redirection_test toRedirection:kRoute_vc_red];
+    [[MKRouter sharedInstance] map:kRoute_redirection_demo toRedirection:kRoute_redirection_test];
+    
+  
+    
+
 }
 
 
@@ -82,7 +102,7 @@ static MKRouterHelper *sharedInstance = nil;
     
     MKRouteType type = [[MKRouter sharedInstance] canRoute:route];
     if (type == MKRouteType_none) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"此版本不支持该功能，请升级到最新版本！" delegate:nil cancelButtonTitle:@"狠心拒绝" otherButtonTitles:@"马上更新", nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"此版本不支持该功能，请升级到最新版本！" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
         [alert show];
         return;
     }
@@ -92,6 +112,7 @@ static MKRouterHelper *sharedInstance = nil;
         ret = [[MKRouter sharedInstance] matchRedirection:route];
     }else if (type == MKRouteType_viewController) {
         ret = [[MKRouter sharedInstance] matchController:route];
+        ((UIViewController *)ret).mk_block = block;
     }else if (type == MKRouteType_block){
         ret = [[MKRouter sharedInstance] matchBlock:route];
     }

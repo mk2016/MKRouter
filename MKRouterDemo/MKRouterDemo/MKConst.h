@@ -18,3 +18,4 @@
 #define MKSCREEN_HEIGHT     [UIScreen mainScreen].bounds.size.height
 #define MKSCREEN_SIZE       [UIScreen mainScreen].bounds.size
 #define MKSCREEN_BOUNDS     [UIScreen mainScreen].bounds
+#define MKBlockExec(block, ...) if (block) { block(__VA_ARGS__); };

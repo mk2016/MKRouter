@@ -11,7 +11,6 @@
 
 @interface MKUITools : NSObject
 
-+ (id)getVCFromStoryboard:(NSString *)storyboard identify:(NSString *)identify;
 
 #pragma mark - ***** top View ******
 + (UIView *)getTopView;
@@ -26,7 +25,6 @@
 + (UIViewController *)getCurrentViewControllerWithWindowLevel:(CGFloat)windowLevel includePresentedVC:(BOOL)isIncludePVC;
 + (UIViewController *)getPresentedViewController;
 
-+ (void)callTelephone:(NSString *)phone showAlert:(BOOL)showAlert;
 
 
 @end
