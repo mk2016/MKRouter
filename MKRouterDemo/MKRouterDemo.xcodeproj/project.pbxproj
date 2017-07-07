@@ -35,6 +35,7 @@
 		C56DD50E1F0CBFC800018F58 /* MKSBGray_VC.m in Sources */ = {isa = PBXBuildFile; fileRef = C56DD50D1F0CBFC800018F58 /* MKSBGray_VC.m */; };
 		C56DD5111F0CD5C200018F58 /* MKTestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C56DD5101F0CD5C200018F58 /* MKTestModel.m */; };
 		C56DD5141F0CDD6000018F58 /* NSObject+MKJsonAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = C56DD5131F0CDD6000018F58 /* NSObject+MKJsonAdd.m */; };
+		C56DD5211F0F89A500018F58 /* MKWebView_VC.m in Sources */ = {isa = PBXBuildFile; fileRef = C56DD5201F0F89A500018F58 /* MKWebView_VC.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -113,6 +114,8 @@
 		C56DD5101F0CD5C200018F58 /* MKTestModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKTestModel.m; sourceTree = "<group>"; };
 		C56DD5121F0CDD6000018F58 /* NSObject+MKJsonAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+MKJsonAdd.h"; sourceTree = "<group>"; };
 		C56DD5131F0CDD6000018F58 /* NSObject+MKJsonAdd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+MKJsonAdd.m"; sourceTree = "<group>"; };
+		C56DD51F1F0F89A500018F58 /* MKWebView_VC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKWebView_VC.h; sourceTree = "<group>"; };
+		C56DD5201F0F89A500018F58 /* MKWebView_VC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKWebView_VC.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -280,6 +283,8 @@
 				C56DD50A1F0CBFAC00018F58 /* MKSBGreen_VC.m */,
 				C56DD50C1F0CBFC800018F58 /* MKSBGray_VC.h */,
 				C56DD50D1F0CBFC800018F58 /* MKSBGray_VC.m */,
+				C56DD51F1F0F89A500018F58 /* MKWebView_VC.h */,
+				C56DD5201F0F89A500018F58 /* MKWebView_VC.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -428,6 +433,7 @@
 				C54DD0A61F039CD800E8CDFA /* MKDemo_VC.m in Sources */,
 				C54DD10D1F064D3C00E8CDFA /* MJFoundation.m in Sources */,
 				C54DD1151F064D3C00E8CDFA /* NSString+MJExtension.m in Sources */,
+				C56DD5211F0F89A500018F58 /* MKWebView_VC.m in Sources */,
 				C56DD5071F0CBF7600018F58 /* MKBlue_VC.m in Sources */,
 				C54DD10E1F064D3C00E8CDFA /* MJProperty.m in Sources */,
 				C56DD50B1F0CBFAC00018F58 /* MKSBGreen_VC.m in Sources */,
