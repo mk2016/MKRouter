@@ -39,7 +39,16 @@
         [self.dataSource addObject:ary];
     }
     {
-        [self.headTitles addObject:@"param route"];
+        [self.headTitles addObject:@"path have param"];
+        NSMutableArray *ary = @[].mutableCopy;
+        [ary addObject:@"/vc/blue/1111"];
+        [ary addObject:@"/vc/red/2222/xiaoming"];
+        [ary addObject:@"/sb/Main/sbid_MKSBGreen_VC/3333/gogogo"];
+        [ary addObject:@"/sb/Main/sbid_MKSBGray_VC/4444/first/小明/second"];
+        [self.dataSource addObject:ary];
+    }
+    {
+        [self.headTitles addObject:@"route set param"];
         NSMutableArray *ary = @[].mutableCopy;
         [ary addObject:kRoute_vc_blue];
         [ary addObject:kRoute_vc_red];
@@ -48,17 +57,7 @@
         [self.dataSource addObject:ary];
     }
     {
-        [self.headTitles addObject:@"path param"];
-        NSMutableArray *ary = @[].mutableCopy;
-        [ary addObject:@"/vc/blue/1111"];
-        [ary addObject:@"/vc/red/2222/xiaoming"];
-        [ary addObject:@"/sb/Main/sbid_MKSBGreen_VC/3333/gogogo"];
-        [ary addObject:@"/sb/Main/sbid_MKSBGray_VC/4444/first/小明/second"];
-        [self.dataSource addObject:ary];
-    }
-    
-    {
-        [self.headTitles addObject:@"hybrid param"];
+        [self.headTitles addObject:@"route append param and action param"];
         NSMutableArray *ary = @[].mutableCopy;
         [ary addObject:@"/vc/blue/1111?param=%7B%22id%22%3A%22118%22%2C%22trackValue%22%3A%22100002%22%7D"];
         [ary addObject:@"/vc/red/2222/xiaoming?param=%7B%22id%22%3A%22118%22%2C%22trackValue%22%3A%22100002%22%7D"];
@@ -83,16 +82,13 @@
         [ary addObject:@"/block/call/tel/10086"];
         [self.dataSource addObject:ary];
     }
-    
-//    [self.dataSource addObject:@"/vc/red?param=%7B%22id%22%3A%22118%22%2C%22trackValue%22%3A%22100002%22%7D"];
-//    [self.dataSource addObject:@"/redirection/test"];
-//    [self.dataSource addObject:@"/redirection/demo?param=%7B%22id%22%3A%22118%22%2C%22trackValue%22%3A%22100002%22%7D"];
-//    [self.dataSource addObject:@"/block/alert/"];
-//    [self.dataSource addObject:@"/block/block/"];
-//    [self.dataSource addObject:@"/vc/red/7777/ppp"];
-//    
-//    [self.dataSource addObject:@"/vc/blue/987/test"];
-//    [self.dataSource addObject:@"/red/blue/888?param=%7B%22id%22%3A%22118%22%2C%22trackValue%22%3A%22100002%22%7D"];
+    {
+        [self.headTitles addObject:@"redirection"];
+        NSMutableArray *ary = @[].mutableCopy;
+        [ary addObject:@"/redirection/to/vc/blueeee?param=%7B%22id%22%3A%22118%22%2C%22trackValue%22%3A%22100002%22%7D"];
+        [ary addObject:@"/redirection/block/alert/5555/aaa"];
+        [self.dataSource addObject:ary];
+    }
     
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, MKSCREEN_WIDTH, MKSCREEN_HEIGHT) style:UITableViewStyleGrouped];
     self.tableView.dataSource = self;
@@ -105,25 +101,22 @@
 
 
 #pragma mark - ***** UITableView delegate *****
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    static NSString *cellId = @"cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
-    }
-    cell.textLabel.numberOfLines = 0;
-    cell.textLabel.text = self.dataSource[indexPath.section][indexPath.row];
-    return cell;
-}
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     NSString *route = self.dataSource[indexPath.section][indexPath.row];
     
-    if (indexPath.section == 1 || indexPath.section == 3) {
+    if ([self.headTitles[indexPath.section] isEqualToString:@"simple route"]
+        || [self.headTitles[indexPath.section] isEqualToString:@"path have param"]
+        || [self.headTitles[indexPath.section] isEqualToString:@"redirection"]
+        ) {
+        [[MKRouterHelper sharedInstance] actionWithRoute:route param:nil onVC:self block:^(id result) {
+            NSLog(@"back block : %@",result);
+        }];
+        
+    }else if ([self.headTitles[indexPath.section] isEqualToString:@"route set param"]){
         id param = nil;
-        if (indexPath.row == 0 || indexPath.row == 1) {
+        if (indexPath.row <= 1) {
             NSDictionary *dic = @{
                                   @"key1" : @"value1",
                                   @"key2" : @(2),
@@ -139,70 +132,51 @@
             model.height = 178.4f;
             param = model;
         }
-        [[MKRouterHelper sharedInstance] actionWithRoute:route param:param onVC:self block:nil];
+        [[MKRouterHelper sharedInstance] actionWithRoute:route param:param onVC:self block:^(id result) {
+            NSLog(@"back block : %@",result);
+        }];
 
-    }else if (indexPath.section == 4){
+    }else if ([self.headTitles[indexPath.section] isEqualToString:@"route append param and action param"]){
+        MKTestModel *model = [[MKTestModel alloc] init];
+        model.name = @"小明";
+        model.age = 14;
+        model.sex = YES;
+        model.height = 178.4f;
+        [[MKRouterHelper sharedInstance] actionWithRoute:route param:model onVC:self block:^(id result) {
+            NSLog(@"back block : %@",result);
+        }];
+
+    }else if ([self.headTitles[indexPath.section] isEqualToString:@"vc action block"]){
         [[MKRouterHelper sharedInstance] actionWithRoute:route param:nil onVC:self block:^(NSDictionary *result) {
             NSString *message = result ? result.description : @"no block param";
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"block param" message:message delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
             [alert show];
         }];
+        
     }else if ([self.headTitles[indexPath.section] isEqualToString:@"block route"]){
-        [[MKRouterHelper sharedInstance] actionWithRoute:route param:nil onVC:self block:^(id result) {
+        MKTestModel *model = [[MKTestModel alloc] init];
+        model.name = @"小明";
+        model.age = 14;
+        model.sex = YES;
+        model.height = 178.4f;
+        [[MKRouterHelper sharedInstance] actionWithRoute:route param:model onVC:self block:^(id result) {
             NSLog(@"result : %@",result);
         }];
-    }else{
-        [[MKRouterHelper sharedInstance] actionWithRoute:route param:nil onVC:self block:nil];
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-//    if (indexPath.row <= 3) {
-//        [[MKRouterHelper sharedInstance] actionWithRoute:self.dataSource[indexPath.row] param:nil onVC:self block:^(id result) {
-//            NSString *message = [NSString stringWithFormat:@"msg:%@",result];
-//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"title" message:message delegate:self cancelButtonTitle:@"NO" otherButtonTitles:@"YES", nil];
-//            [alert show];
-//        }];
-//        
-//    }else if (indexPath.row == 4){
-//        [[MKRouterHelper sharedInstance] actionWithRoute:self.dataSource[indexPath.row] param:nil onVC:self block:^(id result) {
-//            NSLog(@"result : %@", result);
-////            NSString *message = [NSString stringWithFormat:@"msg:%@",result];
-////            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"title" message:message delegate:self cancelButtonTitle:@"NO" otherButtonTitles:@"YES", nil];
-////            [alert show];
-//        }];
-////        MKRouterBlock block = [[MKRouter sharedInstance] matchBlock:self.dataSource[indexPath.row]];
-////        if (block) {
-////            NSMutableDictionary *dic = [NSMutableDictionary dictionary];
-////            [dic setValue:@"1" forKey:@"add"];
-////            block(dic);
-////        }
-//    }else if (indexPath.row == 5){
-//        [[MKRouterHelper sharedInstance] actionWithRoute:self.dataSource[indexPath.row] param:nil onVC:self block:^(id result) {
-//            NSLog(@"result : %@", result);
-//        }];
-//    }else{
-//        NSDictionary *dic = @{
-//                              @"key1" : @"value1",
-//                              @"key2" : @(2),
-//                              @"key3" : @3,
-//                              @"id": @4
-//                              };
-//        [[MKRouterHelper sharedInstance] actionWithRoute:self.dataSource[indexPath.row] param:dic onVC:self block:^(id result) {
-//            
-//        }];
-//    }
-//    
-    
-    
 }
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    static NSString *cellId = @"cell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
+    }
+    cell.textLabel.numberOfLines = 0;
+    cell.textLabel.text = self.dataSource[indexPath.section][indexPath.row];
+    return cell;
+}
+
+
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, MKSCREEN_WIDTH, 30)];

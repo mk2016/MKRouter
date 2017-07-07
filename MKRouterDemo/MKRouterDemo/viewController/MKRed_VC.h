@@ -9,5 +9,5 @@
 #import "MKBase_VC.h"
 
 @interface MKRed_VC : MKBase_VC
-
+@property (nonatomic, assign) BOOL present;
 @end

@@ -65,7 +65,9 @@ static MKRouterHelper *sharedInstance = nil;
     [[MKRouter sharedInstance] map:kRoute_block_nav toBlock:^id(id params) {
         NSLog(@"params: %@", params);
         MKBlock customBlock = [params objectForKey:kMKRouteCustomBlockKey];
-        MKBlockExec(customBlock, params);
+        [self presentRedVCWitBlock:^(id result) {
+            MKBlockExec(customBlock, result);
+        }];
         return params;
     }];
     
@@ -81,12 +83,19 @@ static MKRouterHelper *sharedInstance = nil;
         return params;
     }];
     
-    [[MKRouter sharedInstance] map:kRoute_redirection_test toRedirection:kRoute_vc_red];
-    [[MKRouter sharedInstance] map:kRoute_redirection_demo toRedirection:kRoute_redirection_test];
+    [[MKRouter sharedInstance] map:kRoute_redirection_blue toRedirection:kRoute_vc_blue];
+    [[MKRouter sharedInstance] map:kRoute_redirection_alert toRedirection:kRoute_block_alert];
     
-  
-    
+}
 
+
+- (void)presentRedVCWitBlock:(MKBlock)block{
+    MKRed_VC *vc = [[MKRed_VC alloc] init];
+    vc.present = YES;
+    vc.mk_block = block;
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+    UIViewController *currentVC = [MKUITools getCurrentViewController];
+    [currentVC presentViewController:nav animated:YES completion:nil];
 }
 
 

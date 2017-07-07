@@ -29,9 +29,9 @@ static NSString * const kRoute_block_tel        = @"/block/call/tel/:number";
 
 
 
-static NSString * const kRoute_redirection_test = @"/redirection/test";
-static NSString * const kRoute_redirection_demo = @"/redirection/demo";
-static NSString * const kRoute_redirection_blue = @"/red/blue/:userid";
+static NSString * const kRoute_redirection_blue = @"/redirection/to/vc/blueeee";
+static NSString * const kRoute_redirection_alert = @"/redirection/block/alert/:userid/aaa";
+
 
 
 

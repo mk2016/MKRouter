@@ -11,7 +11,6 @@
 
 @interface MKUITools : NSObject
 
-
 #pragma mark - ***** top View ******
 + (UIView *)getTopView;
 

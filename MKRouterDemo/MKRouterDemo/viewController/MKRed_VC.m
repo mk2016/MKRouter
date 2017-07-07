@@ -7,6 +7,7 @@
 //
 
 #import "MKRed_VC.h"
+#import "MKConst.h"
 
 @interface MKRed_VC ()
 
@@ -18,6 +19,16 @@
     [super viewDidLoad];
     self.title = @"red";
     self.view.backgroundColor = [UIColor redColor];
+}
+
+- (void)btnAction:(UIButton *)sender{
+    if (self.present) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+        MKBlockExec(self.mk_block, @"back success");
+    }else{
+        [self.navigationController popViewControllerAnimated:YES];
+        MKBlockExec(self.mk_block, self.routeParams);
+    }
 }
 
 - (void)didReceiveMemoryWarning {

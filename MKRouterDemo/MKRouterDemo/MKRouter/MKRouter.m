@@ -105,7 +105,7 @@ static MKRouter *sharedInstance = nil;
     NSString *finallyRoute = nil;
     MKRouteType type = [self redirectionFinallyType:route finallyRoute:&finallyRoute];
     if (type == MKRouteType_block) {
-        return [self matchBlock:route orginRoute:route];
+        return [self matchBlock:finallyRoute orginRoute:route];
     }else if (type == MKRouteType_viewController){
         return [self matchController:finallyRoute orginRoute:route];
     }
