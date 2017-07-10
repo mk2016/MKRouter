@@ -47,25 +47,24 @@
     }];
 ```
 #### Exec Route
-* 例1：no query	
+* 1. no query	
 ```
 mkapp://vc/red 				
 ```		
-	其中 scheme 在app内可忽略，但是在WebView中 和 从app外部打开app指定界面时必须有。
+  其中 scheme 在app内可忽略，但是在WebView中 和 从app外部打开app指定界面时必须有。
 	
-* 例2：have query	
-当需要带参数时，比如userId＝1234&&mode＝1 ，则创建JSON｛"userId":1234,"mode":1｝进行encode，然后将这个值拼接到"param="的后面。
+* 2. have query	
+  当需要带参数时，比如userId＝1234&&mode＝1 ，则创建JSON｛"userId":1234,"mode":1｝进行encode，然后将这个值拼接到"param="的后面。
 ```
 mkapp://vc/red?param=%ef%bd%9b%22userId%22%3a1234%2c%22mode%22%3a1%ef%bd%9d
 ```
-* 例3：	
+* 3.  	
 ```		
-	使用 mkapp://vc/red/1234?
-	param=%ef%bd%9b%22userId%22%3a1234%2c%22mode%22%3a1%ef%bd%9d
+mkapp://vc/red/1234?param=%ef%bd%9b%22userId%22%3a1234%2c%22mode%22%3a1%ef%bd%9d
 ```
 
-#### MKRouterHelper
-##### 一行代码简单快速调用
+* MKRouterHelper	
+  一行代码简单快速调用
 ```
 - (void)actionWithRoute:(NSString *)route
                   param:(id)param
