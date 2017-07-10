@@ -48,7 +48,7 @@
         [self.dataSource addObject:ary];
     }
     {
-        [self.headTitles addObject:@"route set param"];
+        [self.headTitles addObject:@"route action param"];
         NSMutableArray *ary = @[].mutableCopy;
         [ary addObject:kRoute_vc_blue];
         [ary addObject:kRoute_vc_red];
@@ -114,7 +114,7 @@
             NSLog(@"back block : %@",result);
         }];
         
-    }else if ([self.headTitles[indexPath.section] isEqualToString:@"route set param"]){
+    }else if ([self.headTitles[indexPath.section] isEqualToString:@"route action param"]){
         id param = nil;
         if (indexPath.row <= 1) {
             NSDictionary *dic = @{

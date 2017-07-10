@@ -1,7 +1,7 @@
 # MKRouter
 #### 在 [HHRouter](https://github.com/lightory/HHRouter) 的基础上做的二次开发。根据业务和实际需求做一定的改造。
 
-由于 HHRouter 只是给出了个统跳协议的解决方案，但在实际应用中还是有很多问题需要自己解决。比如push到下一个界面后，pop回来时想带处理结果回来；比如想在block执行完后添加执行结果的回调；比如在webView内调用了一个打开webView路由；比如从外部打开APP跳到指定界面 等等。
+由于 HHRouter 只是给出了个统跳协议的解决方案，但在实际应用中还是有很多问题需要自己解决。比如push到下一个界面后，pop回来时想带处理结果回来；比如想在block执行完后添加执行结果的回调；比如在webView内调用了一个打开webView路由的处理；比如从外部打开APP跳到指定界面 等等。
 
 根据应用场景，在HHRoute上做了一定的扩展，并添加了一个RouterHelper, 提供统一简单的入口，一行代码执行统跳路由。
 
@@ -10,7 +10,7 @@
 
 
 ## URI
-#### URI:统一跳转协议
+#### URI: Uniform Resource Identifier 
 为了规范客户端与js之间的互操作行为、开放客户端界面功能，定义客户端的URI统一跳转协议。
 
 ```
@@ -23,18 +23,20 @@
      urn:example:animal:ferret:nose
 ```
 
-协议格式为：
+#### format：
 
 ```
  	scheme://authority[/path][?param=xxx]
 ```
-* 例1：（无query ）	 
+## Usage
+#### 具体参考Demo
+* 例1：no query	
 ```
 mkapp://vc/red 				
 ```		
 	其中 scheme 在app内可忽略，但是在WebView中 和 从app外部打开app指定界面时必须有。
 	
-* 例2：（带query ）	
+* 例2：have query	
 当需要带参数时，比如userId＝1234&&mode＝1 ，则创建JSON｛"userId":1234,"mode":1｝进行encode，然后将这个值拼接到"param="的后面。
 ```
 mkapp://vc/red?param=%ef%bd%9b%22userId%22%3a1234%2c%22mode%22%3a1%ef%bd%9d
@@ -48,6 +50,20 @@ mkapp://vc/red?param=%ef%bd%9b%22userId%22%3a1234%2c%22mode%22%3a1%ef%bd%9d
 	param=%ef%bd%9b%22userId%22%3a1234%2c%22mode%22%3a1%ef%bd%9d
 ```
 
-## MKRouterHelper
-
-
+#### MKRouterHelper
+##### 一行代码简单快速调用
+```
+- (void)actionWithRoute:(NSString *)route
+                  param:(id)param
+                   onVC:(UIViewController *)currentVC
+                  block:(MKBlock)block;
+//例：             
+	[[MKRouterHelper sharedInstance] actionWithRoute:route param:param onVC:self block:^(id result) {
+		NSLog(@"back block : %@",result);
+    }];
+```
+* route: 路由		
+* param: 参数，可以转为json字符串的dictionary或model。		
+* block: 回调。		
+		block route 时，在执行完block的回调	
+       viewController route 时，在pop 回来时执行的回调。
