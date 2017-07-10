@@ -29,7 +29,24 @@
  	scheme://authority[/path][?param=xxx]
 ```
 ## Usage
-#### 具体参考Demo
+###### 具体参考Demo
+#### Register Route
+```
+//viewController
+    [[MKRouter sharedInstance] map:kRoute_vc_blue toControllerClass:[MKBlue_VC class]];
+    [[MKRouter sharedInstance] map:kRoute_vc_red toControllerClass:[MKRed_VC class]];
+    
+//block    
+    [[MKRouter sharedInstance] map:kRoute_block_alert toBlock:^id(id params) {
+        NSLog(@"params: %@", params);
+      	// === do someshing ====== //
+      	
+        MKBlock customBlock = [params objectForKey:kMKRouteCustomBlockKey];
+        MKBlockExec(customBlock, @"block success");
+        return params;
+    }];
+```
+#### Exec Route
 * 例1：no query	
 ```
 mkapp://vc/red 				
@@ -42,9 +59,6 @@ mkapp://vc/red
 mkapp://vc/red?param=%ef%bd%9b%22userId%22%3a1234%2c%22mode%22%3a1%ef%bd%9d
 ```
 * 例3：	
-```
-	注册 router : mkapp://vc/red/:userid 
-```
 ```		
 	使用 mkapp://vc/red/1234?
 	param=%ef%bd%9b%22userId%22%3a1234%2c%22mode%22%3a1%ef%bd%9d
