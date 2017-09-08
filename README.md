@@ -39,7 +39,7 @@
 //block    
     [[MKRouter sharedInstance] map:kRoute_block_alert toBlock:^id(id params) {
         NSLog(@"params: %@", params);
-      	// === do someshing ====== //
+      	// === do some thing ====== //
       	
         MKBlock customBlock = [params objectForKey:kMKRouteCustomBlockKey];
         MKBlockExec(customBlock, @"block success");
