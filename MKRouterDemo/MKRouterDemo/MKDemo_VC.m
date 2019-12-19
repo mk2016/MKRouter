@@ -32,7 +32,7 @@
     {
         [self.headTitles addObject:@"simple route"];
         NSMutableArray *ary = @[].mutableCopy;
-        [ary addObject:@"/vc/blue"];
+        [ary addObject:@"/vc/red/1111/test"];
         [ary addObject:@"/sb/Main/sbid_MKSBGreen_VC"];
         [ary addObject:@"MKRouterDemo://vc/red"];
         [ary addObject:@"MKRouterDemo://sb/Main/sbid_MKSBGray_VC"];

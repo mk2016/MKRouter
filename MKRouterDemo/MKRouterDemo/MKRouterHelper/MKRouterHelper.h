@@ -18,6 +18,7 @@ static NSString * const kRoute_vc_gray          = @"/sb/Main/sbid_MKSBGray_VC";
 
 static NSString * const kRoute_vc_path_blue     = @"/vc/blue/:userid";
 static NSString * const kRoute_vc_path_red      = @"/vc/red/:userid/:userName";
+static NSString * const kRoute_vc_path_red_test = @"/vc/red/:user/test";
 static NSString * const kRoute_vc_path_green    = @"/sb/Main/sbid_MKSBGreen_VC/:userid/gogogo";
 static NSString * const kRoute_vc_path_gray     = @"/sb/Main/sbid_MKSBGray_VC/:userid/first/:username/second";
 

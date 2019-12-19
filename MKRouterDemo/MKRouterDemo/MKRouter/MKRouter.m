@@ -267,16 +267,17 @@ static MKRouter *sharedInstance = nil;
     for (NSString *pathComponent in pathComponents) {
         BOOL found = NO;
         NSArray *subRoutesKeys = subRoutes.allKeys;
-        for (NSString *key in subRoutesKeys) {
-            if ([subRoutesKeys containsObject:pathComponent]) {
-                found = YES;
-                subRoutes = subRoutes[pathComponent];
-                break;
-            }else if ([key hasPrefix:@":"]){
-                found = YES;
-                subRoutes = subRoutes[key];
-                params[[key substringFromIndex:1]] = pathComponent;
-                break;
+        if ([subRoutesKeys containsObject:pathComponent]) {
+            found = YES;
+            subRoutes = subRoutes[pathComponent];
+        }else{
+            for (NSString *key in subRoutesKeys) {
+                if ([key hasPrefix:@":"]){
+                    found = YES;
+                    subRoutes = subRoutes[key];
+                    params[[key substringFromIndex:1]] = pathComponent;
+                    break;
+                }
             }
         }
         if (!found) {

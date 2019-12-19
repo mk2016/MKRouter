@@ -47,7 +47,7 @@ static MKRouterHelper *sharedInstance = nil;
     [[MKRouter sharedInstance] map:kRoute_vc_path_red toControllerClass:[MKRed_VC class]];
     [[MKRouter sharedInstance] map:kRoute_vc_path_green toControllerClass:[MKSBGreen_VC class]];
     [[MKRouter sharedInstance] map:kRoute_vc_path_gray toControllerClass:[MKSBGray_VC class]];
-    
+    [[MKRouter sharedInstance] map:kRoute_vc_path_red_test toControllerClass:[MKBlue_VC class]];
 
     [[MKRouter sharedInstance] map:kRoute_block_alert toBlock:^id(id params) {
         NSLog(@"params: %@", params);
