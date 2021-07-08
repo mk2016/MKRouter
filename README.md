@@ -1,5 +1,6 @@
 # MKRouter
-#### 在 [HHRouter](https://github.com/lightory/HHRouter) 的基础上做的二次开发。根据业务和实际需求做一定的改造。
+#### 灵感来源于 [HHRouter](https://github.com/lightory/HHRouter) 。
+#### 支持页面返回的回调，支持`block`的注册。不仅仅是打开页面，可以调用任意组件和方法。
 
 由于 HHRouter 只是给出了个统跳协议的解决方案，但在实际应用中还是有很多问题需要自己解决。比如push到下一个界面后，pop回来时想带处理结果回来；比如想在block执行完后添加执行结果的回调；比如在webView内调用了一个打开webView路由的处理；比如从外部打开APP跳到指定界面 等等。
 
